@@ -1,28 +1,35 @@
+import { Background, Player, Building, Objects } from './test'
+
 import building1 from '../sprites/buildings/building_1.png'
 import building2 from '../sprites/buildings/building_2.png'
 import building3 from '../sprites/buildings/building_3.png'
 import building4 from '../sprites/buildings/building_4.png'
+import home1 from '../sprites/buildings/home_1.png'
 import character from  '../sprites/player/character_2.png'
 import enemy1 from '../sprites/enemies/enemy_1.png'
-import background1 from '../sprites/backgrounds/background_2.png'
+import background1 from '../sprites/backgrounds/background_1.png'
 import treestem1 from '../sprites/objects/treestem_1.png'
 import treestemtop1 from '../sprites/objects/treestemtop_1.png'
 import boat1 from '../sprites/objects/boat_1.png'
 import ladder1 from '../sprites/objects/ladder_1.png'
+import wall1 from '../sprites/objects/wall_1.png'
 
 console.log(building1)
 console.log(building2)
 console.log(building3)
 console.log(building4)
-console.log(character)
+console.log(home1)
+// console.log(character)
 console.log(enemy1)
-console.log(background1)
+// console.log(background1)
 console.log(treestem1)
 console.log(treestemtop1)
 console.log(boat1)
 console.log(ladder1)
+console.log(wall1)
 
-const canvas = document.querySelector('canvas')
+// const canvas = document.querySelector('canvas')
+const canvas = document.getElementById('fullGame')
 const c = canvas.getContext('2d')
 
 canvas.width = 1024
@@ -36,103 +43,103 @@ function createImage(imageSrc) {
   return image
 }
 
-// building class
-class Background {
-  constructor() {
-    this.position = {
-      x: 0,
-      y: 0
-    }
-    this.image = createImage(background1)
-  }
-  draw() {
-    c.drawImage(this.image, this.position.x, this.position.y)
-  }
-  update() {
-    this.draw()
-  }
-}
-
-// player class
-class Player {
-  constructor() {
-    this.position = {
-      x: 100,
-      y: 461
-    }
-    this.velocity = {
-      x: 0,
-      y: 0
-    }
-    this.image = createImage(character)
-  }
-  draw() {
-    c.drawImage(this.image, this.position.x, this.position.y)
-  }
-  update() {
-    this.draw()
-    this.position.x += this.velocity.x
-    this.position.y += this.velocity.y
-
-    if (this.position.y + this.image.height + this.velocity.y <= canvas.height) {
-      this.velocity.y += gravity
-    }
-    else {
-      this.velocity.y = 0
-    }
-  }
-}
-
-
-class Enemy {
-  constructor({ image, x, y, orig_x }) {
-    this.position = {
-      x: x,
-      y: y,
-      orig_x: orig_x
-    }
-    this.velocity = {
-      x: 0,
-      y: 0
-    }
-    this.image = image
-  }
-  draw() {
-    c.drawImage(this.image, this.position.x, this.position.y)
-  }
-  update() {
-    this.draw()
-    this.position.x += this.velocity.x
-    // console.log('difference between enemy and player: ', this.position.orig_x - player.position.x)
-}}
-
-// building class
-class Building {
-  constructor({ x, y, image }) {
-    this.position = {
-      x: x,
-      y: y
-    }
-    this.image = image
-  }
-  draw() {
-    c.drawImage(this.image, this.position.x, this.position.y)
-  }
-}
-
-class Objects {
-  constructor({ x, y, image, climbable }) {
-    this.position = {
-      x: x,
-      y: y
-    }
-    this.image = image
-    this.climbable = climbable
-  }
-  draw() {
-    c.drawImage(this.image, this.position.x, this.position.y)
-  }
-}
+// // building class
+// class Background {
+//   constructor() {
+//     this.position = {
+//       x: 0,
+//       y: 0
+//     }
+//     this.image = createImage(background1)
+//   }
+//   draw() {
+//     c.drawImage(this.image, this.position.x, this.position.y)
+//   }
+//   update() {
+//     this.draw()
+//   }
+// }
+//
+// // player class
+// class Player {
+//   constructor() {
+//     this.position = {
+//       x: 100,
+//       y: 461
+//     }
+//     this.velocity = {
+//       x: 0,
+//       y: 0
+//     }
+//     this.image = createImage(character)
+//   }
+//   draw() {
+//     c.drawImage(this.image, this.position.x, this.position.y)
+//   }
+//   update() {
+//     this.draw()
+//     this.position.x += this.velocity.x
+//     this.position.y += this.velocity.y
+//
+//     if (this.position.y + this.image.height + this.velocity.y <= canvas.height) {
+//       this.velocity.y += gravity
+//     }
+//     else {
+//       this.velocity.y = 0
+//     }
+//   }
+// }
+//
+//
+// class Enemy {
+//   constructor({ image, x, y, orig_x }) {
+//     this.position = {
+//       x: x,
+//       y: y,
+//       orig_x: orig_x
+//     }
+//     this.velocity = {
+//       x: 0,
+//       y: 0
+//     }
+//     this.image = image
+//   }
+//   draw() {
+//     c.drawImage(this.image, this.position.x, this.position.y)
+//   }
+//   update() {
+//     this.draw()
+//     this.position.x += this.velocity.x
+//     // console.log('difference between enemy and player: ', this.position.orig_x - player.position.x)
+// }}
+//
+// // building class
+// class Building {
+//   constructor({ x, y, image }) {
+//     this.position = {
+//       x: x,
+//       y: y
+//     }
+//     this.image = image
+//   }
+//   draw() {
+//     c.drawImage(this.image, this.position.x, this.position.y)
+//   }
+// }
+//
+// class Objects {
+//   constructor({ x, y, image, climbable }) {
+//     this.position = {
+//       x: x,
+//       y: y
+//     }
+//     this.image = image
+//     this.climbable = climbable
+//   }
+//   draw() {
+//     c.drawImage(this.image, this.position.x, this.position.y)
+//   }
+// }
 
 const building1_image = new Image()
 building1_image.src = building1
@@ -145,6 +152,9 @@ building3_image.src = building3
 
 const building4_image = new Image()
 building4_image.src = building4
+
+const home1_image = new Image()
+home1_image.src = home1
 
 const character_image = new Image()
 character_image.src = character
@@ -167,6 +177,9 @@ boat1_image.src = boat1
 const ladder1_image = new Image()
 ladder1_image.src = ladder1
 
+const wall1_image = new Image()
+wall1_image.src = wall1
+
 // will create the background
 const background = new Background({ image: background1_image })
 
@@ -183,7 +196,8 @@ const buildings = [
   // new Building ({ image: building1_image, x: 300, y: 476 }),
   new Building ({ image: building1_image, x: 500, y: 476 }),
   new Building ({ image: building2_image, x: 600, y: 396 }),
-  new Building ({ image: building3_image, x: 800, y: 476 })
+  new Building ({ image: building3_image, x: 800, y: 476 }),
+  new Building ({ image: home1_image, x: 200, y: 526 })
   // new Building ({ image: building4_image, x: 1000, y: 176})
 ]
 
@@ -197,7 +211,9 @@ const objects = [
   // // not trees
   // new Objects ({ image: boat1_image, x: 50, y: 476 }),
   // new Objects ({ image: boat1_image, x: 600, y: 476 })
-  new Objects ({ image: ladder1_image, x: 600, y: 376, climbable: true })
+  new Objects ({ image: ladder1_image, x: 600, y: 476, climbable: true }),
+  new Objects ({ image: ladder1_image, x: 600, y: 376, climbable: true }),
+  new Objects ({ image: wall1_image, x: 0, y: 0, climbable: false })
 ]
 
 const keys = {
@@ -249,21 +265,27 @@ function animate() {
   //   }
   // })
 
+  // prevent player from traveling out of the background top
   if (player.position.y + player.image.height >= background.position.y
     && player.position.y + player.image.height + player.velocity.y <= background.position.y
   ) {
     player.velocity.y += 10
   }
 
+  if (player.position.x < 0) {
+    player.velocity.x = 0
+  }
 
-  if (keys.right.pressed && player.position.x < 1000) {
+
+  if (keys.right.pressed && player.position.x < 800) {
     player.velocity.x = 3
   }
-  else if (keys.left.pressed && player.position.x > 20) {
+  else if (keys.left.pressed && player.position.x > 100) {
     player.velocity.x = -3
   } else {
     player.velocity.x = 0
 
+    // the world moves back
     if (keys.right.pressed) {
       scrollOffset += 3
       buildings.forEach(building => {
@@ -279,6 +301,7 @@ function animate() {
         object.draw()
         object.position.x -= 3
       })
+      // the world moves to the front
     } else if (keys.left.pressed) {
       scrollOffset -= 3
       buildings.forEach(building => {
@@ -306,13 +329,16 @@ function animate() {
       && player.position.x + player.image.width >= building.position.x + 5
       && player.position.x <= building.position.x + building.image.width
     ) {
-      console.log('Building Height: ', building.image.height)
-      console.log('Building Width: ', building.image.width)
+      // console.log('Building Height: ', building.image.height)
+      // console.log('Building Width: ', building.image.width)
       player.velocity.y = 0
     }
   })
 
   objects.forEach(object => {
+    const determineClimbableLeft = player.image.height / 1.5
+    const determineClimbableRight = player.image.height / 3
+
     if (player.position.y + player.image.height <= object.position.y
       && player.position.y + player.image.height + player.velocity.y >= object.position.y
       // will allow player to fall off the sides
@@ -321,23 +347,43 @@ function animate() {
     ) {
       player.velocity.y = 0
       console.log(object.image.height)
+      if (object.climbable === true) {
+        if (keys.down.pressed) {
+          if (player.position.y > canvas.height - player.image.height) {
+            player.velocity.y -= 5
+          }
+          player.velocity.y = 1
+        }
+      }
     }
-
+    // Conditionals to see where character has to be before being able to climb
     if (object.climbable === true) {
       if (object.position.y - player.image.height < player.position.y
       && object.position.y + object.image.height > player.position.y
-      && object.position.x - 5 < player.position.x
-      && object.position.x + object.image.width > player.position.x) {
+      // Determines how much of the character
+      // has to be on ladder in order to stay on
+      && object.position.x - determineClimbableLeft < player.position.x
+      && (object.position.x + object.image.width) - determineClimbableRight > player.position.x) {
         if (keys.up.pressed) {
           player.velocity.y = -1
         }
         else if (keys.down.pressed) {
-          player.velocity.y = 1
+          if (object.position)
+          player.velocity.y = 2
+          console.log(determineClimbableLeft)
+          console.log(determineClimbableRight)
         }
         else {
           player.velocity.y = 0
         }
       }
+    }
+
+    // prevent player from going past limitation wall
+    if (player.position.x + (player.image.width) + player.velocity.x
+      <= object.position.x - ((background.image.width - player.image.width) / 1.75)
+    ) {
+      player.velocity.x += 10
     }
   })
 
@@ -399,6 +445,7 @@ addEventListener('keyup', ({ keyCode }) => {
     case 65:
       // console.log('left')
       keys.left.pressed = false
+      console.log(player.position.x)
       break
   }
   switch (keyCode) {
