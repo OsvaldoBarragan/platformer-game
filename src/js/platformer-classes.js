@@ -1,5 +1,4 @@
-import background1 from '../sprites/backgrounds/background_1.png'
-import character from  '../sprites/player/character_2.png'
+// import character from  '../sprites/player/character_2.png'
 
 function createImage(imageSrc) {
   const image = new Image()
@@ -16,12 +15,12 @@ let gravity = 0.5
 
 // building class
 export class Background {
-  constructor() {
+  constructor({ image }) {
     this.position = {
       x: 0,
       y: 0
     }
-    this.image = createImage(background1)
+    this.image = image
   }
   draw() {
     c.drawImage(this.image, this.position.x, this.position.y)
@@ -33,7 +32,7 @@ export class Background {
 
 // player class
 export class Player {
-  constructor() {
+  constructor({ image }) {
     this.position = {
       x: 100,
       y: 461
@@ -42,7 +41,7 @@ export class Player {
       x: 0,
       y: 0
     }
-    this.image = createImage(character)
+    this.image = image
   }
   draw() {
     c.drawImage(this.image, this.position.x, this.position.y)
