@@ -1,81 +1,18 @@
-<head><link rel="shortcut icon" href="favicon.ico"></head>Html Webpack Plugin:
-<pre>
-  Error: Child compilation failed:
-  Entry module not found: Error: Can't resolve '/Users/osvaldobarragan/Projects/  platformer-game/src/index.html' in '/Users/osvaldobarragan/Projects/platformer  -game':
-  Error: Can't resolve '/Users/osvaldobarragan/Projects/platformer-game/src/inde  x.html' in '/Users/osvaldobarragan/Projects/platformer-game'
-  
-  - compiler.js:141 
-    [platformer-game]/[html-webpack-plugin]/lib/compiler.js:141:18
-  
-  - Compiler.js:343 
-    [platformer-game]/[webpack]/lib/Compiler.js:343:11
-  
-  - Compiler.js:681 
-    [platformer-game]/[webpack]/lib/Compiler.js:681:15
-  
-  
-  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
-    [platformer-game]/[tapable]/lib/Hook.js:154:20
-  
-  - Compiler.js:678 
-    [platformer-game]/[webpack]/lib/Compiler.js:678:31
-  
-  
-  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
-    [platformer-game]/[tapable]/lib/Hook.js:154:20
-  
-  - Compilation.js:1423 
-    [platformer-game]/[webpack]/lib/Compilation.js:1423:35
-  
-  
-  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
-    [platformer-game]/[tapable]/lib/Hook.js:154:20
-  
-  - Compilation.js:1414 
-    [platformer-game]/[webpack]/lib/Compilation.js:1414:32
-  
-  
-  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
-    [platformer-game]/[tapable]/lib/Hook.js:154:20
-  
-  - Compilation.js:1409 
-    [platformer-game]/[webpack]/lib/Compilation.js:1409:36
-  
-  
-  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
-    [platformer-game]/[tapable]/lib/Hook.js:154:20
-  
-  - Compilation.js:1405 
-    [platformer-game]/[webpack]/lib/Compilation.js:1405:32
-  
-  
-  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
-    [platformer-game]/[tapable]/lib/Hook.js:154:20
-  
-  - Compilation.js:1342 Compilation.seal
-    [platformer-game]/[webpack]/lib/Compilation.js:1342:27
-  
-  - Compiler.js:675 
-    [platformer-game]/[webpack]/lib/Compiler.js:675:18
-  
-  - Compilation.js:1261 
-    [platformer-game]/[webpack]/lib/Compilation.js:1261:4
-  
-  
-  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
-    [platformer-game]/[tapable]/lib/Hook.js:154:20
-  
-  - Compilation.js:1253 Compilation.finish
-    [platformer-game]/[webpack]/lib/Compilation.js:1253:28
-  
-  - Compiler.js:672 
-    [platformer-game]/[webpack]/lib/Compiler.js:672:17
-  
-  
-  - Compilation.js:1185 
-    [platformer-game]/[webpack]/lib/Compilation.js:1185:12
-  
-  - Compilation.js:1044 errorAndCallback
-    [platformer-game]/[webpack]/lib/Compilation.js:1044:6
-  
-</pre><script src="./js/canvas.bundle.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mighty Heroes</title>
+    <style>
+      body {
+        margin: 0;
+        background-color: blue;
+        display: flex;
+        align-items: center;
+      }
+    </style>
+  <link rel="shortcut icon" href="favicon.ico"></head>
+  <body>
+    <canvas id="fullGame"></canvas>
+  <script src="./js/canvas.bundle.js"></script></body>
+</html>
