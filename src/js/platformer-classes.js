@@ -1,10 +1,10 @@
 // import character from  '../sprites/player/character_2.png'
 
-function createImage(imageSrc) {
-  const image = new Image()
-  image.src = imageSrc
-  return image
-}
+// function createImage(imageSrc) {
+//   const image = new Image()
+//   image.src = imageSrc
+//   return image
+// }
 
 const canvas = document.getElementById('fullGame')
 const c = canvas.getContext('2d')
@@ -35,7 +35,7 @@ export class Player {
   constructor({ image }) {
     this.position = {
       x: 100,
-      y: 461
+      y: 561
     }
     this.velocity = {
       x: 0,
@@ -62,7 +62,7 @@ export class Player {
 
 
 export class Enemy {
-  constructor({ image, x, y, orig_x }) {
+  constructor({ x, y, image, orig_x }) {
     this.position = {
       x: x,
       y: y,
@@ -98,13 +98,27 @@ export class Building {
 }
 
 export class Objects {
-  constructor({ x, y, image, climbable }) {
+  constructor({ x, y, image, climbable, limitationWall }) {
     this.position = {
       x: x,
       y: y
     }
     this.image = image
     this.climbable = climbable
+    this.limitationWall = limitationWall
+  }
+  draw() {
+    c.drawImage(this.image, this.position.x, this.position.y)
+  }
+}
+
+export class MoveToNextRound {
+  constructor({ x, y, image }) {
+    this.position = {
+      x: x,
+      y: y
+    }
+    this.image = image
   }
   draw() {
     c.drawImage(this.image, this.position.x, this.position.y)

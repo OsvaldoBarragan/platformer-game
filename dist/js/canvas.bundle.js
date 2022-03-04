@@ -90,7 +90,7 @@
 /*!*********************************!*\
   !*** ./src/js/assign-images.js ***!
   \*********************************/
-/*! exports provided: building1_image, building2_image, building3_image, building4_image, home1_image, character1_image, character2_image, character3_image, enemy1_image, background1_image, background2_image, background3_image, treestem1_image, treestemtop1_image, boat1_image, ladder1_image, wall1_image */
+/*! exports provided: building1_image, building2_image, building3_image, building4_image, home1_image, character1_image, character2_image, character3_image, enemy1_image, background1_image, background2_image, background3_image, background4_image, treestem1_image, treestemtop1_image, boat1_image, ladder1_image, wall1_image, weapon1_image, finish1_image, ground1_image */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -107,11 +107,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "background1_image", function() { return background1_image; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "background2_image", function() { return background2_image; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "background3_image", function() { return background3_image; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "background4_image", function() { return background4_image; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "treestem1_image", function() { return treestem1_image; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "treestemtop1_image", function() { return treestemtop1_image; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "boat1_image", function() { return boat1_image; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ladder1_image", function() { return ladder1_image; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "wall1_image", function() { return wall1_image; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "weapon1_image", function() { return weapon1_image; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "finish1_image", function() { return finish1_image; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ground1_image", function() { return ground1_image; });
 /* harmony import */ var _sprites_buildings_building_1_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sprites/buildings/building_1.png */ "./src/sprites/buildings/building_1.png");
 /* harmony import */ var _sprites_buildings_building_2_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sprites/buildings/building_2.png */ "./src/sprites/buildings/building_2.png");
 /* harmony import */ var _sprites_buildings_building_3_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../sprites/buildings/building_3.png */ "./src/sprites/buildings/building_3.png");
@@ -124,11 +128,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sprites_backgrounds_background_1_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../sprites/backgrounds/background_1.png */ "./src/sprites/backgrounds/background_1.png");
 /* harmony import */ var _sprites_backgrounds_background_2_png__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../sprites/backgrounds/background_2.png */ "./src/sprites/backgrounds/background_2.png");
 /* harmony import */ var _sprites_backgrounds_background_3_png__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../sprites/backgrounds/background_3.png */ "./src/sprites/backgrounds/background_3.png");
-/* harmony import */ var _sprites_objects_treestem_1_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../sprites/objects/treestem_1.png */ "./src/sprites/objects/treestem_1.png");
-/* harmony import */ var _sprites_objects_treestemtop_1_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../sprites/objects/treestemtop_1.png */ "./src/sprites/objects/treestemtop_1.png");
-/* harmony import */ var _sprites_objects_boat_1_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../sprites/objects/boat_1.png */ "./src/sprites/objects/boat_1.png");
-/* harmony import */ var _sprites_objects_ladder_1_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../sprites/objects/ladder_1.png */ "./src/sprites/objects/ladder_1.png");
-/* harmony import */ var _sprites_objects_wall_1_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../sprites/objects/wall_1.png */ "./src/sprites/objects/wall_1.png");
+/* harmony import */ var _sprites_backgrounds_background_4_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../sprites/backgrounds/background_4.png */ "./src/sprites/backgrounds/background_4.png");
+/* harmony import */ var _sprites_objects_treestem_1_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../sprites/objects/treestem_1.png */ "./src/sprites/objects/treestem_1.png");
+/* harmony import */ var _sprites_objects_treestemtop_1_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../sprites/objects/treestemtop_1.png */ "./src/sprites/objects/treestemtop_1.png");
+/* harmony import */ var _sprites_objects_boat_1_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../sprites/objects/boat_1.png */ "./src/sprites/objects/boat_1.png");
+/* harmony import */ var _sprites_objects_ladder_1_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../sprites/objects/ladder_1.png */ "./src/sprites/objects/ladder_1.png");
+/* harmony import */ var _sprites_objects_wall_1_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../sprites/objects/wall_1.png */ "./src/sprites/objects/wall_1.png");
+/* harmony import */ var _sprites_weapons_weapon_1_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../sprites/weapons/weapon_1.png */ "./src/sprites/weapons/weapon_1.png");
+/* harmony import */ var _sprites_finish_finish_1_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../sprites/finish/finish_1.png */ "./src/sprites/finish/finish_1.png");
+/* harmony import */ var _sprites_objects_ground_1_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../sprites/objects/ground_1.png */ "./src/sprites/objects/ground_1.png");
+
+
+
+
 
 
 
@@ -170,16 +182,24 @@ var background2_image = new Image();
 background2_image.src = _sprites_backgrounds_background_2_png__WEBPACK_IMPORTED_MODULE_10__["default"];
 var background3_image = new Image();
 background3_image.src = _sprites_backgrounds_background_3_png__WEBPACK_IMPORTED_MODULE_11__["default"];
+var background4_image = new Image();
+background4_image.src = _sprites_backgrounds_background_4_png__WEBPACK_IMPORTED_MODULE_12__["default"];
 var treestem1_image = new Image();
-treestem1_image.src = _sprites_objects_treestem_1_png__WEBPACK_IMPORTED_MODULE_12__["default"];
+treestem1_image.src = _sprites_objects_treestem_1_png__WEBPACK_IMPORTED_MODULE_13__["default"];
 var treestemtop1_image = new Image();
-treestemtop1_image.src = _sprites_objects_treestemtop_1_png__WEBPACK_IMPORTED_MODULE_13__["default"];
+treestemtop1_image.src = _sprites_objects_treestemtop_1_png__WEBPACK_IMPORTED_MODULE_14__["default"];
 var boat1_image = new Image();
-boat1_image.src = _sprites_objects_boat_1_png__WEBPACK_IMPORTED_MODULE_14__["default"];
+boat1_image.src = _sprites_objects_boat_1_png__WEBPACK_IMPORTED_MODULE_15__["default"];
 var ladder1_image = new Image();
-ladder1_image.src = _sprites_objects_ladder_1_png__WEBPACK_IMPORTED_MODULE_15__["default"];
+ladder1_image.src = _sprites_objects_ladder_1_png__WEBPACK_IMPORTED_MODULE_16__["default"];
 var wall1_image = new Image();
-wall1_image.src = _sprites_objects_wall_1_png__WEBPACK_IMPORTED_MODULE_16__["default"];
+wall1_image.src = _sprites_objects_wall_1_png__WEBPACK_IMPORTED_MODULE_17__["default"];
+var weapon1_image = new Image();
+weapon1_image.src = _sprites_weapons_weapon_1_png__WEBPACK_IMPORTED_MODULE_18__["default"];
+var finish1_image = new Image();
+finish1_image.src = _sprites_finish_finish_1_png__WEBPACK_IMPORTED_MODULE_19__["default"];
+var ground1_image = new Image();
+ground1_image.src = _sprites_objects_ground_1_png__WEBPACK_IMPORTED_MODULE_20__["default"];
 
 /***/ }),
 
@@ -192,14 +212,27 @@ wall1_image.src = _sprites_objects_wall_1_png__WEBPACK_IMPORTED_MODULE_16__["def
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _levels_level2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./levels/level2 */ "./src/js/levels/level2.js");
+/* harmony import */ var _levels_level1__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./levels/level1 */ "./src/js/levels/level1.js");
+/* harmony import */ var _levels_level2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./levels/level2 */ "./src/js/levels/level2.js");
+/* harmony import */ var _levels_level3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./levels/level3 */ "./src/js/levels/level3.js");
+/* harmony import */ var _levels_level4__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./levels/level4 */ "./src/js/levels/level4.js");
+// /* eslint-disable */
+// import { background, player, buildings, objects, moveToNextLevel } from './levels/level1'
+// import * as level1 from './levels/level1'
+// import * as level2 from './levels/level2'
+// import * as level3 from './levels/level3'
+// import { background, player, buildings, objects } from './levels/level2'
+
+
+
  // const canvas = document.querySelector('canvas')
 
 var canvas = document.getElementById('fullGame');
 var c = canvas.getContext('2d');
-console.log(_levels_level2__WEBPACK_IMPORTED_MODULE_0__["background"]);
 canvas.width = 1024;
 canvas.height = 576;
+var level = _levels_level1__WEBPACK_IMPORTED_MODULE_0__;
+var pow = false;
 var keys = {
   right: {
     pressed: false
@@ -223,14 +256,15 @@ function animate() {
   requestAnimationFrame(animate);
   c.fillStyle = 'white';
   c.fillRect(0, 0, canvas.width, canvas.height);
-  _levels_level2__WEBPACK_IMPORTED_MODULE_0__["background"].update();
-  _levels_level2__WEBPACK_IMPORTED_MODULE_0__["buildings"].forEach(function (building) {
+  level.background.update();
+  level.buildings.forEach(function (building) {
     building.draw();
   });
-  _levels_level2__WEBPACK_IMPORTED_MODULE_0__["objects"].forEach(function (object) {
+  level.objects.forEach(function (object) {
     object.draw();
   });
-  _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].update(); // enemies.forEach(enemy => {
+  level.player.update();
+  level.moveToNextRound.draw(); // enemies.forEach(enemy => {
   //   enemy.update()
   // })
   // enemies.forEach(enemy => {
@@ -241,26 +275,26 @@ function animate() {
   //     enemy.velocity.x++
   //   }
   // })
-  // prevent player from traveling out of the background top
+  // prevent level.player from traveling out of the level.background top
 
-  if (_levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.y + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.height >= _levels_level2__WEBPACK_IMPORTED_MODULE_0__["background"].position.y && _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.y + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.height + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y <= _levels_level2__WEBPACK_IMPORTED_MODULE_0__["background"].position.y) {
-    _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y += 10;
+  if (level.player.position.y + level.player.image.height >= level.background.position.y && level.player.position.y + level.player.image.height + level.player.velocity.y <= level.background.position.y) {
+    level.player.velocity.y += 10;
   }
 
-  if (_levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.x < 0) {
-    _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.x = 0;
+  if (level.player.position.x < 0) {
+    level.player.velocity.x = 0;
   }
 
-  if (keys.right.pressed && _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.x < 800) {
-    _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.x = 3;
-  } else if (keys.left.pressed && _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.x > 100) {
-    _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.x = -3;
+  if (keys.right.pressed && level.player.position.x < 800) {
+    level.player.velocity.x = 3;
+  } else if (keys.left.pressed && level.player.position.x > 100) {
+    level.player.velocity.x = -3;
   } else {
-    _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.x = 0; // the world moves back
+    level.player.velocity.x = 0; // the world moves back
 
     if (keys.right.pressed) {
       scrollOffset += 3;
-      _levels_level2__WEBPACK_IMPORTED_MODULE_0__["buildings"].forEach(function (building) {
+      level.buildings.forEach(function (building) {
         building.draw();
         building.position.x -= 3;
       }); // enemies.forEach(enemy => {
@@ -269,13 +303,15 @@ function animate() {
       //   // enemy.velocity.x = 0
       // })
 
-      _levels_level2__WEBPACK_IMPORTED_MODULE_0__["objects"].forEach(function (object) {
+      level.objects.forEach(function (object) {
         object.draw();
         object.position.x -= 3;
-      }); // the world moves to the front
+      });
+      level.moveToNextRound.draw();
+      level.moveToNextRound.position.x -= 3; // the world moves to the front
     } else if (keys.left.pressed) {
       scrollOffset -= 3;
-      _levels_level2__WEBPACK_IMPORTED_MODULE_0__["buildings"].forEach(function (building) {
+      level.buildings.forEach(function (building) {
         building.draw();
         building.position.x += 3;
       }); // enemies.forEach(enemy => {
@@ -284,71 +320,111 @@ function animate() {
       //   // enemy.velocity.x = 0
       // })
 
-      _levels_level2__WEBPACK_IMPORTED_MODULE_0__["objects"].forEach(function (object) {
+      level.objects.forEach(function (object) {
         object.draw();
         object.position.x += 3;
       });
+      level.moveToNextRound.draw();
+      level.moveToNextRound.position.x += 3;
     }
   }
 
-  _levels_level2__WEBPACK_IMPORTED_MODULE_0__["buildings"].forEach(function (building) {
+  level.buildings.forEach(function (building) {
     // platform collision detection
-    // will keep player on top of platform
-    if (_levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.y + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.height <= building.position.y && _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.y + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.height + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y >= building.position.y // will allow player to fall off the sides
-    && _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.x + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.width >= building.position.x + 5 && _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.x <= building.position.x + building.image.width) {
+    // will keep level.player on top of platform
+    if (level.player.position.y + level.player.image.height <= building.position.y && level.player.position.y + level.player.image.height + level.player.velocity.y >= building.position.y // will allow level.player to fall off the sides
+    && level.player.position.x + level.player.image.width >= building.position.x + 5 && level.player.position.x <= building.position.x + building.image.width) {
       // console.log('Building Height: ', building.image.height)
       // console.log('Building Width: ', building.image.width)
-      _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y = 0;
+      level.player.velocity.y = 0;
     }
   });
-  _levels_level2__WEBPACK_IMPORTED_MODULE_0__["objects"].forEach(function (object) {
-    var determineClimbableLeft = _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.height / 1.5;
-    var determineClimbableRight = _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.height / 3;
+  level.objects.forEach(function (object) {
+    var determineClimbableLeft = level.player.image.height / 1.5;
+    var determineClimbableRight = level.player.image.height / 3;
 
-    if (_levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.y + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.height <= object.position.y && _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.y + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.height + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y >= object.position.y // will allow player to fall off the sides
-    && _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.x + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.width >= object.position.x + 5 && _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.x <= object.position.x + object.image.width) {
-      _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y = 0;
+    if (object.limitationWall === true) {
+      // prevent level.player from going past limitation wall
+      if (level.player.position.x + level.player.image.width + level.player.velocity.x <= object.position.x + 20) {
+        level.player.velocity.x += 10;
+      }
+    }
+
+    if (level.player.position.y + level.player.image.height <= object.position.y && level.player.position.y + level.player.image.height + level.player.velocity.y >= object.position.y // will allow level.player to fall off the sides
+    && level.player.position.x + level.player.image.width >= object.position.x + 5 && level.player.position.x <= object.position.x + object.image.width) {
+      level.player.velocity.y = 0;
       console.log(object.image.height);
 
       if (object.climbable === true) {
         if (keys.down.pressed) {
-          if (_levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.y > canvas.height - _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.height) {
-            _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y -= 5;
+          if (level.player.position.y > canvas.height - level.player.image.height) {
+            level.player.velocity.y -= 5;
           }
 
-          _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y = 1;
+          level.player.velocity.y = 1;
         }
       }
     } // Conditionals to see where character has to be before being able to climb
 
 
     if (object.climbable === true) {
-      if (object.position.y - _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.height < _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.y && object.position.y + object.image.height > _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.y // Determines how much of the character
+      if (object.position.y - level.player.image.height < level.player.position.y && object.position.y + object.image.height > level.player.position.y // Determines how much of the character
       // has to be on ladder in order to stay on
-      && object.position.x - determineClimbableLeft < _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.x && object.position.x + object.image.width - determineClimbableRight > _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.x) {
+      && object.position.x - determineClimbableLeft < level.player.position.x && object.position.x + object.image.width - determineClimbableRight > level.player.position.x) {
         if (keys.up.pressed) {
-          _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y = -1;
+          level.player.velocity.y = -1;
         } else if (keys.down.pressed) {
-          if (object.position) _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y = 2;
-          console.log(determineClimbableLeft);
-          console.log(determineClimbableRight);
+          // if (object.position)
+          level.player.velocity.y = 2;
+
+          if (object.position.y + object.image.height === 576) {
+            // level.player.velocity.y = 0
+            console.log(level.player.position.y);
+
+            if (level.player.position.y > 576 - level.player.image.height) {
+              level.player.velocity.y = 0;
+            }
+          } // console.log(determineClimbableLeft)
+          // console.log(determineClimbableRight)
+
         } else {
-          _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y = 0;
+          level.player.velocity.y = 0;
         }
       }
-    } // prevent player from going past limitation wall
-
-
-    if (_levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.x + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.width + _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.x <= object.position.x - (_levels_level2__WEBPACK_IMPORTED_MODULE_0__["background"].image.width - _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].image.width) / 1.75) {
-      _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.x += 10;
     }
-  }); // If the end is reached, do this
+  });
+  var determineClimbableLeft = level.player.image.height / 1.5;
+  var determineClimbableRight = level.player.image.height / 3;
 
-  if (scrollOffset > 2000) {
-    console.log('You Win!');
+  if (level.moveToNextRound.position.y - level.player.image.height < level.player.position.y && level.moveToNextRound.position.y + level.moveToNextRound.image.height > level.player.position.y // Determines how much of the character
+  // has to be on ladder in order to stay on
+  && level.moveToNextRound.position.x - determineClimbableLeft < level.player.position.x && level.moveToNextRound.position.x + level.moveToNextRound.image.width - determineClimbableRight > level.player.position.x) {
+    if (keys.up.pressed) {
+      level.player.velocity.y = 0;
+      pow = true;
+    }
   }
-} // console.log(player.image.height)
 
+  if (level === _levels_level1__WEBPACK_IMPORTED_MODULE_0__) {
+    if (pow === true) {
+      level = _levels_level2__WEBPACK_IMPORTED_MODULE_1__; // onLevelOne = false
+      // onLevelTwo = true
+
+      pow = false;
+    }
+  } else if (level === _levels_level2__WEBPACK_IMPORTED_MODULE_1__) {
+    if (pow === true) {
+      level = _levels_level3__WEBPACK_IMPORTED_MODULE_2__; // onLevelTwo = false
+      // onLevelThree = true
+
+      pow = false;
+    }
+  } else if (level === _levels_level3__WEBPACK_IMPORTED_MODULE_2__) {
+    if (pow === true) {
+      level = _levels_level4__WEBPACK_IMPORTED_MODULE_3__;
+    }
+  }
+}
 
 animate();
 addEventListener('keydown', function (_ref) {
@@ -365,20 +441,19 @@ addEventListener('keydown', function (_ref) {
   switch (keyCode) {
     case 87:
       // console.log('up')
-      if (keys.up.pressed === false && _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y >= 0) {
-        if (_levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y < 0) {
-          _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y += 0;
+      if (keys.up.pressed === false && level.player.velocity.y >= 0) {
+        if (level.player.velocity.y > 0) {
           break;
         }
 
         keys.up.pressed = true;
-        _levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].velocity.y -= 10;
+        level.player.velocity.y -= 10;
         break;
       }
 
     // keys.up.pressed = true
     // console.log('Up Key: ', keys.up.pressed)
-    // player.velocity.y -= 10
+    // level.player.velocity.y -= 10
     // break
   }
 
@@ -404,14 +479,13 @@ addEventListener('keyup', function (_ref2) {
     case 65:
       // console.log('left')
       keys.left.pressed = false;
-      console.log(_levels_level2__WEBPACK_IMPORTED_MODULE_0__["player"].position.x);
       break;
   }
 
   switch (keyCode) {
     case 87:
       // console.log('up')
-      keys.up.pressed = false; // player.velocity.y += 5
+      keys.up.pressed = false; // level.player.velocity.y += 5
 
       break;
   }
@@ -433,24 +507,99 @@ addEventListener('keyup', function (_ref2) {
 
 /***/ }),
 
-/***/ "./src/js/levels/level2.js":
+/***/ "./src/js/levels/level1.js":
 /*!*********************************!*\
-  !*** ./src/js/levels/level2.js ***!
+  !*** ./src/js/levels/level1.js ***!
   \*********************************/
-/*! exports provided: background, player, buildings, objects */
+/*! exports provided: id, background, player, buildings, objects, moveToNextRound */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "id", function() { return id; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "background", function() { return background; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "player", function() { return player; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildings", function() { return buildings; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "objects", function() { return objects; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moveToNextRound", function() { return moveToNextRound; });
+/* harmony import */ var _platformer_classes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../platformer-classes */ "./src/js/platformer-classes.js");
+/* harmony import */ var _assign_images__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../assign-images */ "./src/js/assign-images.js");
+
+
+var id = 1;
+var background = new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Background"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["background3_image"]
+});
+var player = new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Player"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["character1_image"]
+});
+var buildings = [new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["building1_image"],
+  x: 500,
+  y: 476
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["building2_image"],
+  x: 600,
+  y: 396
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["building3_image"],
+  x: 800,
+  y: 476
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["building4_image"],
+  x: 300,
+  y: 190
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["home1_image"],
+  x: 200,
+  y: 526
+})];
+var objects = [new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Objects"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["ladder1_image"],
+  x: 600,
+  y: 476,
+  climbable: true
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Objects"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["wall1_image"],
+  x: 0,
+  y: 0,
+  climbable: false,
+  limitationWall: true
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Objects"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["ladder1_image"],
+  x: 750,
+  y: 430,
+  climbable: true
+})];
+var moveToNextRound = new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["MoveToNextRound"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["finish1_image"],
+  x: 693,
+  y: 526
+});
+
+/***/ }),
+
+/***/ "./src/js/levels/level2.js":
+/*!*********************************!*\
+  !*** ./src/js/levels/level2.js ***!
+  \*********************************/
+/*! exports provided: id, background, player, buildings, objects, moveToNextRound */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "id", function() { return id; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "background", function() { return background; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "player", function() { return player; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildings", function() { return buildings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "objects", function() { return objects; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moveToNextRound", function() { return moveToNextRound; });
 /* harmony import */ var _platformer_classes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../platformer-classes */ "./src/js/platformer-classes.js");
 /* harmony import */ var _assign_images__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../assign-images */ "./src/js/assign-images.js");
  //
 
 
+var id = 2;
 var background = new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Background"]({
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["background2_image"]
 });
@@ -462,13 +611,142 @@ var buildings = [new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["home1_image"],
   x: 200,
   y: 526
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["home1_image"],
+  x: 300,
+  y: 400
 })];
 var objects = [new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Objects"]({
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["wall1_image"],
   x: 0,
   y: 0,
-  climbable: false
+  climbable: false,
+  limitationWall: true
 })];
+var moveToNextRound = new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["MoveToNextRound"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["finish1_image"],
+  x: 30,
+  y: 526
+});
+
+/***/ }),
+
+/***/ "./src/js/levels/level3.js":
+/*!*********************************!*\
+  !*** ./src/js/levels/level3.js ***!
+  \*********************************/
+/*! exports provided: id, background, player, buildings, objects, moveToNextRound */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "id", function() { return id; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "background", function() { return background; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "player", function() { return player; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildings", function() { return buildings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "objects", function() { return objects; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moveToNextRound", function() { return moveToNextRound; });
+/* harmony import */ var _platformer_classes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../platformer-classes */ "./src/js/platformer-classes.js");
+/* harmony import */ var _assign_images__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../assign-images */ "./src/js/assign-images.js");
+
+
+var id = 3;
+var background = new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Background"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["background1_image"]
+});
+var player = new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Player"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["character1_image"]
+});
+var buildings = [new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["building1_image"],
+  x: 500,
+  y: 476
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["building2_image"],
+  x: 600,
+  y: 396
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["building3_image"],
+  x: 800,
+  y: 476
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["building4_image"],
+  x: 300,
+  y: 190
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["home1_image"],
+  x: 200,
+  y: 526
+})];
+var objects = [new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Objects"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["ladder1_image"],
+  x: 600,
+  y: 476,
+  climbable: true
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Objects"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["wall1_image"],
+  x: 0,
+  y: 0,
+  climbable: false,
+  limitationWall: true
+})];
+var moveToNextRound = new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["MoveToNextRound"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["finish1_image"],
+  x: 20,
+  y: 526
+});
+
+/***/ }),
+
+/***/ "./src/js/levels/level4.js":
+/*!*********************************!*\
+  !*** ./src/js/levels/level4.js ***!
+  \*********************************/
+/*! exports provided: id, background, player, buildings, objects, moveToNextRound */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "id", function() { return id; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "background", function() { return background; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "player", function() { return player; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildings", function() { return buildings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "objects", function() { return objects; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moveToNextRound", function() { return moveToNextRound; });
+/* harmony import */ var _platformer_classes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../platformer-classes */ "./src/js/platformer-classes.js");
+/* harmony import */ var _assign_images__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../assign-images */ "./src/js/assign-images.js");
+ //
+
+
+var id = 4;
+var background = new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Background"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["background4_image"]
+});
+var player = new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Player"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["character1_image"]
+}); // will create the buildings
+
+var buildings = [new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["home1_image"],
+  x: 200,
+  y: 526
+}), new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["home1_image"],
+  x: 300,
+  y: 400
+})];
+var objects = [new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Objects"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["wall1_image"],
+  x: 0,
+  y: 0,
+  climbable: false,
+  limitationWall: true
+})];
+var moveToNextRound = new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["MoveToNextRound"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["finish1_image"],
+  x: 20,
+  y: 526
+});
 
 /***/ }),
 
@@ -476,7 +754,7 @@ var objects = [new _platformer_classes__WEBPACK_IMPORTED_MODULE_0__["Objects"]({
 /*!**************************************!*\
   !*** ./src/js/platformer-classes.js ***!
   \**************************************/
-/*! exports provided: Background, Player, Enemy, Building, Objects */
+/*! exports provided: Background, Player, Enemy, Building, Objects, MoveToNextRound */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -486,6 +764,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Enemy", function() { return Enemy; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Building", function() { return Building; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Objects", function() { return Objects; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MoveToNextRound", function() { return MoveToNextRound; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -493,12 +772,11 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 // import character from  '../sprites/player/character_2.png'
-function createImage(imageSrc) {
-  var image = new Image();
-  image.src = imageSrc;
-  return image;
-}
-
+// function createImage(imageSrc) {
+//   const image = new Image()
+//   image.src = imageSrc
+//   return image
+// }
 var canvas = document.getElementById('fullGame');
 var c = canvas.getContext('2d');
 canvas.width = 1024;
@@ -541,7 +819,7 @@ var Player = /*#__PURE__*/function () {
 
     this.position = {
       x: 100,
-      y: 461
+      y: 561
     };
     this.velocity = {
       x: 0,
@@ -574,9 +852,9 @@ var Player = /*#__PURE__*/function () {
 }();
 var Enemy = /*#__PURE__*/function () {
   function Enemy(_ref3) {
-    var image = _ref3.image,
-        x = _ref3.x,
+    var x = _ref3.x,
         y = _ref3.y,
+        image = _ref3.image,
         orig_x = _ref3.orig_x;
 
     _classCallCheck(this, Enemy);
@@ -638,7 +916,8 @@ var Objects = /*#__PURE__*/function () {
     var x = _ref5.x,
         y = _ref5.y,
         image = _ref5.image,
-        climbable = _ref5.climbable;
+        climbable = _ref5.climbable,
+        limitationWall = _ref5.limitationWall;
 
     _classCallCheck(this, Objects);
 
@@ -648,6 +927,7 @@ var Objects = /*#__PURE__*/function () {
     };
     this.image = image;
     this.climbable = climbable;
+    this.limitationWall = limitationWall;
   }
 
   _createClass(Objects, [{
@@ -658,6 +938,30 @@ var Objects = /*#__PURE__*/function () {
   }]);
 
   return Objects;
+}();
+var MoveToNextRound = /*#__PURE__*/function () {
+  function MoveToNextRound(_ref6) {
+    var x = _ref6.x,
+        y = _ref6.y,
+        image = _ref6.image;
+
+    _classCallCheck(this, MoveToNextRound);
+
+    this.position = {
+      x: x,
+      y: y
+    };
+    this.image = image;
+  }
+
+  _createClass(MoveToNextRound, [{
+    key: "draw",
+    value: function draw() {
+      c.drawImage(this.image, this.position.x, this.position.y);
+    }
+  }]);
+
+  return MoveToNextRound;
 }();
 
 /***/ }),
@@ -698,6 +1002,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "6c9408ffa8e67fa0f01d4f1b8d2e74a1.png");
+
+/***/ }),
+
+/***/ "./src/sprites/backgrounds/background_4.png":
+/*!**************************************************!*\
+  !*** ./src/sprites/backgrounds/background_4.png ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "2009917ed817738f9bbfbd10ff73ed2f.png");
 
 /***/ }),
 
@@ -779,6 +1096,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/sprites/finish/finish_1.png":
+/*!*****************************************!*\
+  !*** ./src/sprites/finish/finish_1.png ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "b2666180a08e795e6cdc0a680fbc6a21.png");
+
+/***/ }),
+
 /***/ "./src/sprites/objects/boat_1.png":
 /*!****************************************!*\
   !*** ./src/sprites/objects/boat_1.png ***!
@@ -789,6 +1119,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "2a4cfe58370fa58b7660bf92ec2e8939.png");
+
+/***/ }),
+
+/***/ "./src/sprites/objects/ground_1.png":
+/*!******************************************!*\
+  !*** ./src/sprites/objects/ground_1.png ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "f977c70f8072f9059d3a226cfb71862d.png");
 
 /***/ }),
 
@@ -880,6 +1223,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "2f723161fd50f9b0d10f2c464aae2d53.png");
+
+/***/ }),
+
+/***/ "./src/sprites/weapons/weapon_1.png":
+/*!******************************************!*\
+  !*** ./src/sprites/weapons/weapon_1.png ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "c87f3f9389b5adcb3b44687783c3b83d.png");
 
 /***/ })
 

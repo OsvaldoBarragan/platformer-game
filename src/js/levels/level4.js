@@ -1,11 +1,11 @@
 import { Background, Player, Building, Objects, MoveToNextRound } from './../platformer-classes'
 //
-import { home1_image, character1_image, background2_image,
+import { home1_image, character1_image, background4_image,
     wall1_image, finish1_image } from './../assign-images'
 
-export const id = 2
+export const id = 4
 
-export const background = new Background({ image: background2_image })
+export const background = new Background({ image: background4_image })
 
 export const player = new Player({ image: character1_image })
 
@@ -19,4 +19,4 @@ export const objects = [
     new Objects ({ image: wall1_image, x: 0, y: 0, climbable: false, limitationWall: true })
 ]
 
-export const moveToNextRound = new MoveToNextRound ({ image: finish1_image, x: 30, y: 526 })
+export const moveToNextRound = new MoveToNextRound ({ image: finish1_image, x: 20, y: 526 })

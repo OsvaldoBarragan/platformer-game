@@ -10,11 +10,15 @@ import enemy1 from '../sprites/enemies/enemy_1.png'
 import background1 from '../sprites/backgrounds/background_1.png'
 import background2 from '../sprites/backgrounds/background_2.png'
 import background3 from '../sprites/backgrounds/background_3.png'
+import background4 from '../sprites/backgrounds/background_4.png'
 import treestem1 from '../sprites/objects/treestem_1.png'
 import treestemtop1 from '../sprites/objects/treestemtop_1.png'
 import boat1 from '../sprites/objects/boat_1.png'
 import ladder1 from '../sprites/objects/ladder_1.png'
 import wall1 from '../sprites/objects/wall_1.png'
+import weapon1 from '../sprites/weapons/weapon_1.png'
+import finish1 from '../sprites/finish/finish_1.png'
+import ground1 from '../sprites/objects/ground_1.png'
 
 
 export const building1_image = new Image()
@@ -53,6 +57,9 @@ background2_image.src = background2
 export const background3_image = new Image()
 background3_image.src = background3
 
+export const background4_image = new Image()
+background4_image.src = background4
+
 export const treestem1_image = new Image()
 treestem1_image.src = treestem1
 
@@ -67,3 +74,12 @@ ladder1_image.src = ladder1
 
 export const wall1_image = new Image()
 wall1_image.src = wall1
+
+export const weapon1_image = new Image()
+weapon1_image.src = weapon1
+
+export const finish1_image = new Image()
+finish1_image.src = finish1
+
+export const ground1_image = new Image()
+ground1_image.src = ground1
