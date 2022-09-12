@@ -74,9 +74,23 @@ export class Player {
     }
 }
 
-// building class
-export class Building {
-    constructor({ x, y, image }) {
+// these are objects the user can go through
+export class PermeableObjects {
+    constructor({ image, x, y }) {
+        this.position = {
+            x: x,
+            y: y
+        }
+        this.image = image
+    }
+    draw() {
+        c.drawImage(this.image, this.position.x, this.position.y)
+    }
+}
+
+// these are objects the user cannot go through
+export class OtherObjects {
+    constructor({ image, x, y }) {
         this.position = {
             x: x,
             y: y

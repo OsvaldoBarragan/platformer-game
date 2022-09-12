@@ -4,8 +4,8 @@ import { mainChar_front_image, mainChar_back_image, mainChar_left_image, mainCha
 const canvas = document.getElementById('fullGame')
 const c = canvas.getContext('2d')
 
-canvas.width = 500
-canvas.height = 250
+canvas.width = 1000
+canvas.height = 500
 
 let world = one
 
@@ -30,6 +30,33 @@ function animate() {
     c.fillRect(0, 0, canvas.width, canvas.height)
     world.background.update()
     world.player.update()
+    world.otherObjects.forEach(obj => {
+        obj.draw()
+    })
+    // Other Objects Conditions
+    world.otherObjects.forEach(obj => {
+        const player = world.player
+        if (player.position.x + player.spriteWidth + player.velocity.x >= obj.position.x &&
+        player.position.x <= obj.position.x + obj.image.width &&
+        player.position.y + player.spriteHeight >= obj.position.y &&
+        player.position.y <= obj.position.y + obj.image.height) {
+            if (userKeys.d_Key.pressed === true) { player.position.x = obj.position.x - player.spriteWidth }
+        }
+
+        if (player.position.x + player.velocity.x <= obj.position.x + obj.image.width &&
+        player.position.x + player.spriteWidth >= obj.position.x &&
+        player.position.y + player.spriteHeight >= obj.position.y &&
+        player.position.y <= obj.position.y + obj.image.height) {
+            if (userKeys.a_Key.pressed === true) { player.position.x = obj.position.x + obj.image.width }
+        }
+
+        if (player.position.y + player.spriteHeight + player.velocity.y >= obj.position.y &&
+        player.position.y <= obj.position.y + obj.image.height &&
+        player.position.x + player.spriteWidth >= obj.position.x &&
+        player.position.x <= obj.position.x + obj.image.width) {
+            if (userKeys.s_Key.pressed === true) { player.position.y = obj.position.y - player.spriteHeight }
+        }
+    })
 
     // scroll background up if player moves down
     if (world.player.position.y + world.player.spriteHeight >= canvas.height) {
@@ -37,18 +64,19 @@ function animate() {
             world.player.position.y = canvas.height - world.player.spriteHeight
         }
         else {
+            if (userKeys.s_Key.pressed === true) { world.background.position.y -= 1 }
             world.player.position.y = canvas.height - world.player.spriteHeight
-            world.background.position.y -= 1
         }
     }
-    // prevent from moving past top border
+    // scroll background down if player moves up
     if (world.player.position.y + world.player.velocity.y <= 0) {
         if (world.background.position.y >= 0) {
             world.player.position.y = 0
         }
         else {
+            if (userKeys.w_Key.pressed === true) { world.background.position.y += 1 }
             world.player.position.y = 0
-            world.background.position.y += 1
+            // world.background.position.y += 1
         }
     }
     // scroll background to the left if player moves right
@@ -58,8 +86,8 @@ function animate() {
             world.player.velocity.x = 0
         }
         else {
+            if (userKeys.d_Key.pressed === true) { world.background.position.x -= 1 }
             world.player.position.x = canvas.width - world.player.spriteWidth
-            world.background.position.x -= 1
         }
     }
     // scroll background to the right if player moves left
@@ -69,8 +97,8 @@ function animate() {
             world.player.velocity.x = 0
         }
         else {
+            if (userKeys.a_Key.pressed === true) { world.background.position.x += 1 }
             world.player.position.x = 0
-            world.background.position.x += 1
         }
     }
 }

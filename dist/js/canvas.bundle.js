@@ -90,7 +90,7 @@
 /*!*********************************!*\
   !*** ./src/js/assign-images.js ***!
   \*********************************/
-/*! exports provided: mainChar_front_image, mainChar_back_image, mainChar_left_image, mainChar_right_image, r1_image */
+/*! exports provided: mainChar_front_image, mainChar_back_image, mainChar_left_image, mainChar_right_image, r1_image, brick_black_image, building1_image */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100,11 +100,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mainChar_left_image", function() { return mainChar_left_image; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mainChar_right_image", function() { return mainChar_right_image; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r1_image", function() { return r1_image; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "brick_black_image", function() { return brick_black_image; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "building1_image", function() { return building1_image; });
 /* harmony import */ var _sprites_characters_mainCharacter_front_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sprites/characters/mainCharacter_front.png */ "./src/sprites/characters/mainCharacter_front.png");
 /* harmony import */ var _sprites_characters_mainCharacter_back_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sprites/characters/mainCharacter_back.png */ "./src/sprites/characters/mainCharacter_back.png");
 /* harmony import */ var _sprites_characters_mainCharacter_left_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../sprites/characters/mainCharacter_left.png */ "./src/sprites/characters/mainCharacter_left.png");
 /* harmony import */ var _sprites_characters_mainCharacter_right_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../sprites/characters/mainCharacter_right.png */ "./src/sprites/characters/mainCharacter_right.png");
 /* harmony import */ var _sprites_worlds_test_r1_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../sprites/worlds/test/r1.png */ "./src/sprites/worlds/test/r1.png");
+/* harmony import */ var _sprites_objects_brick_black_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../sprites/objects/brick_black.png */ "./src/sprites/objects/brick_black.png");
+/* harmony import */ var _sprites_objects_treasure_collector_building1_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../sprites/objects/treasure_collector_building1.png */ "./src/sprites/objects/treasure_collector_building1.png");
+
+
 
 
 
@@ -120,6 +126,10 @@ var mainChar_right_image = new Image();
 mainChar_right_image.src = _sprites_characters_mainCharacter_right_png__WEBPACK_IMPORTED_MODULE_3__["default"];
 var r1_image = new Image();
 r1_image.src = _sprites_worlds_test_r1_png__WEBPACK_IMPORTED_MODULE_4__["default"];
+var brick_black_image = new Image();
+brick_black_image.src = _sprites_objects_brick_black_png__WEBPACK_IMPORTED_MODULE_5__["default"];
+var building1_image = new Image();
+building1_image.src = _sprites_objects_treasure_collector_building1_png__WEBPACK_IMPORTED_MODULE_6__["default"];
 
 /***/ }),
 
@@ -138,8 +148,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var canvas = document.getElementById('fullGame');
 var c = canvas.getContext('2d');
-canvas.width = 500;
-canvas.height = 250;
+canvas.width = 1000;
+canvas.height = 500;
 var world = _world_one__WEBPACK_IMPORTED_MODULE_0__;
 var userKeys = {
   w_Key: {
@@ -165,24 +175,55 @@ function animate() {
   c.fillStyle = 'white';
   c.fillRect(0, 0, canvas.width, canvas.height);
   world.background.update();
-  world.player.update(); // scroll background up if player moves down
+  world.player.update();
+  world.otherObjects.forEach(function (obj) {
+    obj.draw();
+  }); // Other Objects Conditions
+
+  world.otherObjects.forEach(function (obj) {
+    var player = world.player;
+
+    if (player.position.x + player.spriteWidth + player.velocity.x >= obj.position.x && player.position.x <= obj.position.x + obj.image.width && player.position.y + player.spriteHeight >= obj.position.y && player.position.y <= obj.position.y + obj.image.height) {
+      if (userKeys.d_Key.pressed === true) {
+        player.position.x = obj.position.x - player.spriteWidth;
+      }
+    }
+
+    if (player.position.x + player.velocity.x <= obj.position.x + obj.image.width && player.position.x + player.spriteWidth >= obj.position.x && player.position.y + player.spriteHeight >= obj.position.y && player.position.y <= obj.position.y + obj.image.height) {
+      if (userKeys.a_Key.pressed === true) {
+        player.position.x = obj.position.x + obj.image.width;
+      }
+    }
+
+    if (player.position.y + player.spriteHeight + player.velocity.y >= obj.position.y && player.position.y <= obj.position.y + obj.image.height && player.position.x + player.spriteWidth >= obj.position.x && player.position.x <= obj.position.x + obj.image.width) {
+      if (userKeys.s_Key.pressed === true) {
+        player.position.y = obj.position.y - player.spriteHeight;
+      }
+    }
+  }); // scroll background up if player moves down
 
   if (world.player.position.y + world.player.spriteHeight >= canvas.height) {
     if (world.background.position.y <= -250) {
       world.player.position.y = canvas.height - world.player.spriteHeight;
     } else {
+      if (userKeys.s_Key.pressed === true) {
+        world.background.position.y -= 1;
+      }
+
       world.player.position.y = canvas.height - world.player.spriteHeight;
-      world.background.position.y -= 1;
     }
-  } // prevent from moving past top border
+  } // scroll background down if player moves up
 
 
   if (world.player.position.y + world.player.velocity.y <= 0) {
     if (world.background.position.y >= 0) {
       world.player.position.y = 0;
     } else {
-      world.player.position.y = 0;
-      world.background.position.y += 1;
+      if (userKeys.w_Key.pressed === true) {
+        world.background.position.y += 1;
+      }
+
+      world.player.position.y = 0; // world.background.position.y += 1
     }
   } // scroll background to the left if player moves right
 
@@ -192,8 +233,11 @@ function animate() {
       world.player.position.x = canvas.width - world.player.spriteWidth;
       world.player.velocity.x = 0;
     } else {
+      if (userKeys.d_Key.pressed === true) {
+        world.background.position.x -= 1;
+      }
+
       world.player.position.x = canvas.width - world.player.spriteWidth;
-      world.background.position.x -= 1;
     }
   } // scroll background to the right if player moves left
 
@@ -203,8 +247,11 @@ function animate() {
       world.player.position.x = 0;
       world.player.velocity.x = 0;
     } else {
+      if (userKeys.a_Key.pressed === true) {
+        world.background.position.x += 1;
+      }
+
       world.player.position.x = 0;
-      world.background.position.x += 1;
     }
   }
 }
@@ -299,14 +346,15 @@ addEventListener('keyup', function (_ref2) {
 /*!********************************!*\
   !*** ./src/js/game-classes.js ***!
   \********************************/
-/*! exports provided: Background, Player, Building */
+/*! exports provided: Background, Player, PermeableObjects, OtherObjects */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Background", function() { return Background; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Player", function() { return Player; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Building", function() { return Building; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PermeableObjects", function() { return PermeableObjects; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OtherObjects", function() { return OtherObjects; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -402,15 +450,15 @@ var Player = /*#__PURE__*/function () {
   }]);
 
   return Player;
-}(); // building class
+}(); // these are objects the user can go through
 
-var Building = /*#__PURE__*/function () {
-  function Building(_ref3) {
-    var x = _ref3.x,
-        y = _ref3.y,
-        image = _ref3.image;
+var PermeableObjects = /*#__PURE__*/function () {
+  function PermeableObjects(_ref3) {
+    var image = _ref3.image,
+        x = _ref3.x,
+        y = _ref3.y;
 
-    _classCallCheck(this, Building);
+    _classCallCheck(this, PermeableObjects);
 
     this.position = {
       x: x,
@@ -419,14 +467,39 @@ var Building = /*#__PURE__*/function () {
     this.image = image;
   }
 
-  _createClass(Building, [{
+  _createClass(PermeableObjects, [{
     key: "draw",
     value: function draw() {
       c.drawImage(this.image, this.position.x, this.position.y);
     }
   }]);
 
-  return Building;
+  return PermeableObjects;
+}(); // these are objects the user cannot go through
+
+var OtherObjects = /*#__PURE__*/function () {
+  function OtherObjects(_ref4) {
+    var image = _ref4.image,
+        x = _ref4.x,
+        y = _ref4.y;
+
+    _classCallCheck(this, OtherObjects);
+
+    this.position = {
+      x: x,
+      y: y
+    };
+    this.image = image;
+  }
+
+  _createClass(OtherObjects, [{
+    key: "draw",
+    value: function draw() {
+      c.drawImage(this.image, this.position.x, this.position.y);
+    }
+  }]);
+
+  return OtherObjects;
 }();
 
 /***/ }),
@@ -435,28 +508,34 @@ var Building = /*#__PURE__*/function () {
 /*!*****************************!*\
   !*** ./src/js/world/one.js ***!
   \*****************************/
-/*! exports provided: background, player */
+/*! exports provided: background, player, otherObjects */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "background", function() { return background; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "player", function() { return player; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "otherObjects", function() { return otherObjects; });
 /* harmony import */ var _game_classes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../game-classes */ "./src/js/game-classes.js");
 /* harmony import */ var _assign_images__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../assign-images */ "./src/js/assign-images.js");
 
 
 var canvas = document.getElementById('fullGame');
-canvas.width = 300;
+canvas.width = 500;
 canvas.height = 250;
 var background = new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Background"]({
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["r1_image"]
 });
 var player = new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Player"]({
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["mainChar_front_image"],
-  x: 300,
-  y: 200
+  x: 250,
+  y: 125
 });
+var otherObjects = [new _game_classes__WEBPACK_IMPORTED_MODULE_0__["OtherObjects"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["building1_image"],
+  x: 100,
+  y: 100
+})];
 
 /***/ }),
 
@@ -509,6 +588,32 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "7e0f9846fe9af9e27b2edfed972c1326.png");
+
+/***/ }),
+
+/***/ "./src/sprites/objects/brick_black.png":
+/*!*********************************************!*\
+  !*** ./src/sprites/objects/brick_black.png ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "5fbaf3c266fe42b212cef1e7a950c8c0.png");
+
+/***/ }),
+
+/***/ "./src/sprites/objects/treasure_collector_building1.png":
+/*!**************************************************************!*\
+  !*** ./src/sprites/objects/treasure_collector_building1.png ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "f08308685b98f8c6fdcc429462b8cf11.png");
 
 /***/ }),
 
