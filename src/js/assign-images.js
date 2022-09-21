@@ -5,6 +5,8 @@ import mainChar_right from '../sprites/characters/mainCharacter_right.png'
 import r1 from '../sprites/worlds/test/r1.png'
 import brick_black from '../sprites/objects/brick_black.png'
 import building1 from '../sprites/objects/treasure_collector_building1.png'
+import door1 from '../sprites/doors/door_1.png'
+import water from '../sprites/water/water1.png'
 
 
 export const mainChar_front_image = new Image()
@@ -27,3 +29,9 @@ brick_black_image.src = brick_black
 
 export const building1_image = new Image()
 building1_image.src = building1
+
+export const door1_image = new Image()
+door1_image.src = door1
+
+export const water_image = new Image()
+water_image.src = water

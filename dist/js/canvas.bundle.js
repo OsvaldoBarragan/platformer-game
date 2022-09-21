@@ -90,7 +90,7 @@
 /*!*********************************!*\
   !*** ./src/js/assign-images.js ***!
   \*********************************/
-/*! exports provided: mainChar_front_image, mainChar_back_image, mainChar_left_image, mainChar_right_image, r1_image, brick_black_image, building1_image */
+/*! exports provided: mainChar_front_image, mainChar_back_image, mainChar_left_image, mainChar_right_image, r1_image, brick_black_image, building1_image, door1_image, water_image */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -102,6 +102,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r1_image", function() { return r1_image; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "brick_black_image", function() { return brick_black_image; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "building1_image", function() { return building1_image; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "door1_image", function() { return door1_image; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "water_image", function() { return water_image; });
 /* harmony import */ var _sprites_characters_mainCharacter_front_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sprites/characters/mainCharacter_front.png */ "./src/sprites/characters/mainCharacter_front.png");
 /* harmony import */ var _sprites_characters_mainCharacter_back_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sprites/characters/mainCharacter_back.png */ "./src/sprites/characters/mainCharacter_back.png");
 /* harmony import */ var _sprites_characters_mainCharacter_left_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../sprites/characters/mainCharacter_left.png */ "./src/sprites/characters/mainCharacter_left.png");
@@ -109,6 +111,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sprites_worlds_test_r1_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../sprites/worlds/test/r1.png */ "./src/sprites/worlds/test/r1.png");
 /* harmony import */ var _sprites_objects_brick_black_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../sprites/objects/brick_black.png */ "./src/sprites/objects/brick_black.png");
 /* harmony import */ var _sprites_objects_treasure_collector_building1_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../sprites/objects/treasure_collector_building1.png */ "./src/sprites/objects/treasure_collector_building1.png");
+/* harmony import */ var _sprites_doors_door_1_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../sprites/doors/door_1.png */ "./src/sprites/doors/door_1.png");
+/* harmony import */ var _sprites_water_water1_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../sprites/water/water1.png */ "./src/sprites/water/water1.png");
+
+
 
 
 
@@ -130,6 +136,10 @@ var brick_black_image = new Image();
 brick_black_image.src = _sprites_objects_brick_black_png__WEBPACK_IMPORTED_MODULE_5__["default"];
 var building1_image = new Image();
 building1_image.src = _sprites_objects_treasure_collector_building1_png__WEBPACK_IMPORTED_MODULE_6__["default"];
+var door1_image = new Image();
+door1_image.src = _sprites_doors_door_1_png__WEBPACK_IMPORTED_MODULE_7__["default"];
+var water_image = new Image();
+water_image.src = _sprites_water_water1_png__WEBPACK_IMPORTED_MODULE_8__["default"];
 
 /***/ }),
 
@@ -137,20 +147,34 @@ building1_image.src = _sprites_objects_treasure_collector_building1_png__WEBPACK
 /*!**************************!*\
   !*** ./src/js/canvas.js ***!
   \**************************/
-/*! no exports provided */
+/*! exports provided: world, topCollision, inWater */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "world", function() { return world; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "topCollision", function() { return topCollision; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inWater", function() { return inWater; });
 /* harmony import */ var _world_one__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./world/one */ "./src/js/world/one.js");
 /* harmony import */ var _assign_images__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assign-images */ "./src/js/assign-images.js");
 
 
+
+
 var canvas = document.getElementById('fullGame');
-var c = canvas.getContext('2d');
+var c = canvas.getContext('2d'); // const canvas2 = document.getElementById('sideInfo')
+// const c2 = canvas2.getContext('2d')
+
 canvas.width = 1000;
-canvas.height = 500;
+canvas.height = 500; // canvas2.width = 300
+// canvas2.height = 150
+
 var world = _world_one__WEBPACK_IMPORTED_MODULE_0__;
+var topCollision = false;
+var bottomCollision = false;
+var leftCollision = false;
+var rightCollision = false;
+var inWater = false;
 var userKeys = {
   w_Key: {
     // go up
@@ -175,30 +199,91 @@ function animate() {
   c.fillStyle = 'white';
   c.fillRect(0, 0, canvas.width, canvas.height);
   world.background.update();
-  world.player.update();
-  world.otherObjects.forEach(function (obj) {
-    obj.draw();
-  }); // Other Objects Conditions
+  world.buildings.forEach(function (building) {
+    building.draw();
+  });
+  world.doors.forEach(function (door) {
+    door.draw();
+  });
+  world.water.forEach(function (water) {
+    water.update();
+  });
+  world.player.update(); // console.log(topCollision)
+  // Building Conditions
 
-  world.otherObjects.forEach(function (obj) {
+  world.buildings.forEach(function (building) {
+    var player = world.player; // prevent from going down
+
+    if (player.position.x + player.spriteWidth >= building.position.x && player.position.x <= building.position.x + building.image.width && player.position.y + player.spriteHeight <= building.position.y && player.position.y + player.spriteHeight + player.velocity.y >= building.position.y) {
+      topCollision = true;
+      player.velocity.y = 0;
+      player.position.y = building.position.y - player.spriteHeight;
+      console.log(topCollision);
+    } else {
+      topCollision = false;
+    } // if (player.position.x + player.spriteWidth >= building.position.x &&
+    //     player.position.x <= building.position.x + building.image.width &&
+    //     player.position.y >= building.position.y + building.image.height - player.spriteHeight &&
+    //     player.position.y + player.velocity.y <= building.position.y + building.image.height - player.spriteHeight) {
+    //     bottomCollision = true
+    //     player.velocity.y = 0
+    //     player.position.y = building.position.y + building.image.height - player.spriteHeight
+    // }
+    // else {
+    //     bottomCollision = false
+    // }
+    // if (player.position.x + player.spriteWidth >= building.position.x &&
+    //     player.position.x <= building.position.x + building.image.width &&
+    //     player.position.y >= building.position.y + building.image.height - player.spriteHeight &&
+    //     player.position.y + player.velocity.y <= building.position.y + building.image.height - player.spriteHeight) {
+    //     bottomCollision = true
+    //     player.velocity.y = 0
+    //     player.position.y = building.position.y + building.image.height - player.spriteHeight
+    // }
+    // else {
+    //     bottomCollision = false
+    // }
+    //
+    // if (player.position.y + player.spriteHeight >= building.position.y &&
+    //     player.position.y <= building.position.y + building.image.height - player.spriteHeight - 1 &&
+    //     player.position.x + player.spriteWidth <= building.position.x &&
+    //     player.position.x + player.spriteWidth + player.velocity.x >= building.position.x) {
+    //     leftCollision = true
+    //     player.velocity.x = 0
+    //     player.position.x = building.position.x - player.spriteWidth
+    // }
+    // else {
+    //     leftCollision = false
+    // }
+    //
+    // if (player.position.y + player.spriteHeight >= building.position.y &&
+    //     player.position.y <= building.position.y + building.image.height - player.spriteHeight - 1 &&
+    //     player.position.x >= building.position.x + building.image.width &&
+    //     player.position.x + player.velocity.x <= building.position.x + building.image.width) {
+    //     rightCollision = true
+    //     player.velocity.x = 0
+    //     player.position.x = building.position.x + building.image.width
+    // }
+    // else {
+    //     rightCollision = false
+    // }
+
+  }); // if (inWater === true) {
+  //     world.player.spriteHeight = world.player.image.height / 1.5
+  // }
+  // if (inWater === false) {
+  //     world.player.spriteHeight = world.player.image.height
+  // }
+  // Water Conditions
+
+  world.water.forEach(function (water) {
     var player = world.player;
 
-    if (player.position.x + player.spriteWidth + player.velocity.x >= obj.position.x && player.position.x <= obj.position.x + obj.image.width && player.position.y + player.spriteHeight >= obj.position.y && player.position.y <= obj.position.y + obj.image.height) {
-      if (userKeys.d_Key.pressed === true) {
-        player.position.x = obj.position.x - player.spriteWidth;
-      }
-    }
-
-    if (player.position.x + player.velocity.x <= obj.position.x + obj.image.width && player.position.x + player.spriteWidth >= obj.position.x && player.position.y + player.spriteHeight >= obj.position.y && player.position.y <= obj.position.y + obj.image.height) {
-      if (userKeys.a_Key.pressed === true) {
-        player.position.x = obj.position.x + obj.image.width;
-      }
-    }
-
-    if (player.position.y + player.spriteHeight + player.velocity.y >= obj.position.y && player.position.y <= obj.position.y + obj.image.height && player.position.x + player.spriteWidth >= obj.position.x && player.position.x <= obj.position.x + obj.image.width) {
-      if (userKeys.s_Key.pressed === true) {
-        player.position.y = obj.position.y - player.spriteHeight;
-      }
+    if (player.position.x + 5 >= water.position.x && player.position.x + player.spriteWidth - 5 <= water.position.x + water.spriteWidth && player.position.y + player.spriteHeight / 1.5 >= water.position.y && player.position.y + player.spriteHeight <= water.position.y + water.spriteHeight) {
+      inWater = true;
+      console.log(inWater);
+    } else {
+      inWater = false;
     }
   }); // scroll background up if player moves down
 
@@ -208,6 +293,15 @@ function animate() {
     } else {
       if (userKeys.s_Key.pressed === true) {
         world.background.position.y -= 1;
+        world.buildings.forEach(function (building) {
+          building.position.y -= 1;
+        });
+        world.doors.forEach(function (door) {
+          door.position.y -= 1;
+        });
+        world.water.forEach(function (water) {
+          water.position.y -= 1;
+        });
       }
 
       world.player.position.y = canvas.height - world.player.spriteHeight;
@@ -221,6 +315,15 @@ function animate() {
     } else {
       if (userKeys.w_Key.pressed === true) {
         world.background.position.y += 1;
+        world.buildings.forEach(function (building) {
+          building.position.y += 1;
+        });
+        world.doors.forEach(function (door) {
+          door.position.y += 1;
+        });
+        world.water.forEach(function (water) {
+          water.position.y += 1;
+        });
       }
 
       world.player.position.y = 0; // world.background.position.y += 1
@@ -235,6 +338,15 @@ function animate() {
     } else {
       if (userKeys.d_Key.pressed === true) {
         world.background.position.x -= 1;
+        world.buildings.forEach(function (building) {
+          building.position.x -= 1;
+        });
+        world.doors.forEach(function (door) {
+          door.position.x -= 1;
+        });
+        world.water.forEach(function (water) {
+          water.position.x -= 1;
+        });
       }
 
       world.player.position.x = canvas.width - world.player.spriteWidth;
@@ -249,21 +361,34 @@ function animate() {
     } else {
       if (userKeys.a_Key.pressed === true) {
         world.background.position.x += 1;
+        world.buildings.forEach(function (building) {
+          building.position.x += 1;
+        });
+        world.doors.forEach(function (door) {
+          door.position.x += 1;
+        });
+        world.water.forEach(function (water) {
+          water.position.x += 1;
+        });
       }
 
       world.player.position.x = 0;
     }
   }
-}
+} // function animateInfo() {
+//     requestAnimationFrame(animateInfo)
+//     c2.fillStyle = 'white'
+//     c2.fillRect(0, 0, canvas2.width, canvas2.height)
+// }
+// let numOfImages = 1
+// function loadImages () {
+//     if (--numOfImages > 0) return
+//     animate()
+// }
+// loadImages()
 
-var numOfImages = 1;
 
-function loadImages() {
-  if (--numOfImages > 0) return;
-  animate();
-}
-
-loadImages(); // animate()
+animate(); // animateInfo()
 
 addEventListener('keydown', function (_ref) {
   var keyCode = _ref.keyCode;
@@ -271,37 +396,81 @@ addEventListener('keydown', function (_ref) {
   switch (keyCode) {
     case 87:
       userKeys.w_Key.pressed = true;
+      userKeys.s_Key.pressed = false;
+      userKeys.a_Key.pressed = false;
+      userKeys.d_Key.pressed = false;
       world.player.image = _assign_images__WEBPACK_IMPORTED_MODULE_1__["mainChar_back_image"];
       world.player.totalFrames = 3;
-      world.player.velocity.y = -2;
-      break;
+
+      if (bottomCollision === true) {
+        break;
+      }
+
+      if (bottomCollision === false) {
+        world.player.velocity.y = -2;
+        break;
+      }
+
   }
 
   switch (keyCode) {
     case 83:
       userKeys.s_Key.pressed = true;
+      userKeys.w_Key.pressed = false;
+      userKeys.a_Key.pressed = false;
+      userKeys.d_Key.pressed = false;
       world.player.image = _assign_images__WEBPACK_IMPORTED_MODULE_1__["mainChar_front_image"];
       world.player.totalFrames = 3;
-      world.player.velocity.y = 2;
-      break;
+
+      if (topCollision === true) {
+        break;
+      }
+
+      if (topCollision === false) {
+        world.player.velocity.y = 2;
+        break;
+      }
+
   }
 
   switch (keyCode) {
     case 65:
       userKeys.a_Key.pressed = true;
+      userKeys.d_Key.pressed = false;
+      userKeys.w_Key.pressed = false;
+      userKeys.s_Key.pressed = false;
       world.player.image = _assign_images__WEBPACK_IMPORTED_MODULE_1__["mainChar_left_image"];
       world.player.totalFrames = 3;
-      world.player.velocity.x = -2;
-      break;
+
+      if (rightCollision === true) {
+        break;
+      }
+
+      if (rightCollision === false) {
+        world.player.velocity.x = -2;
+        break;
+      }
+
   }
 
   switch (keyCode) {
     case 68:
       userKeys.d_Key.pressed = true;
+      userKeys.a_Key.pressed = false;
+      userKeys.s_Key.pressed = false;
+      userKeys.w_Key.pressed = false;
       world.player.image = _assign_images__WEBPACK_IMPORTED_MODULE_1__["mainChar_right_image"];
       world.player.totalFrames = 3;
-      world.player.velocity.x = 2;
-      break;
+
+      if (leftCollision === true) {
+        break;
+      }
+
+      if (leftCollision === false) {
+        world.player.velocity.x = 2;
+        break;
+      }
+
   }
 });
 addEventListener('keyup', function (_ref2) {
@@ -346,20 +515,23 @@ addEventListener('keyup', function (_ref2) {
 /*!********************************!*\
   !*** ./src/js/game-classes.js ***!
   \********************************/
-/*! exports provided: Background, Player, PermeableObjects, OtherObjects */
+/*! exports provided: Background, Player, Building, Door, Water */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Background", function() { return Background; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Player", function() { return Player; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PermeableObjects", function() { return PermeableObjects; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OtherObjects", function() { return OtherObjects; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Building", function() { return Building; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Door", function() { return Door; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Water", function() { return Water; });
+/* harmony import */ var _canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./canvas */ "./src/js/canvas.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 var canvas = document.getElementById('fullGame');
 var c = canvas.getContext('2d'); // function createImage(imageSrc) {
@@ -369,7 +541,9 @@ var c = canvas.getContext('2d'); // function createImage(imageSrc) {
 // }
 
 canvas.width = 1000;
-canvas.height = 500; // building class
+canvas.height = 500;
+_canvas__WEBPACK_IMPORTED_MODULE_0__["inWater"];
+_canvas__WEBPACK_IMPORTED_MODULE_0__["world"]; // building class
 
 var Background = /*#__PURE__*/function () {
   function Background(_ref) {
@@ -446,19 +620,25 @@ var Player = /*#__PURE__*/function () {
       this.draw();
       this.position.x += this.velocity.x;
       this.position.y += this.velocity.y;
+
+      if (_canvas__WEBPACK_IMPORTED_MODULE_0__["inWater"] === true) {
+        this.spriteHeight = this.image.height / 1.5;
+      } else if (_canvas__WEBPACK_IMPORTED_MODULE_0__["inWater"] === false) {
+        this.spriteHeight = this.image.height;
+      }
     }
   }]);
 
   return Player;
-}(); // these are objects the user can go through
+}(); // Building
 
-var PermeableObjects = /*#__PURE__*/function () {
-  function PermeableObjects(_ref3) {
+var Building = /*#__PURE__*/function () {
+  function Building(_ref3) {
     var image = _ref3.image,
         x = _ref3.x,
         y = _ref3.y;
 
-    _classCallCheck(this, PermeableObjects);
+    _classCallCheck(this, Building);
 
     this.position = {
       x: x,
@@ -467,23 +647,22 @@ var PermeableObjects = /*#__PURE__*/function () {
     this.image = image;
   }
 
-  _createClass(PermeableObjects, [{
+  _createClass(Building, [{
     key: "draw",
     value: function draw() {
       c.drawImage(this.image, this.position.x, this.position.y);
     }
   }]);
 
-  return PermeableObjects;
-}(); // these are objects the user cannot go through
-
-var OtherObjects = /*#__PURE__*/function () {
-  function OtherObjects(_ref4) {
+  return Building;
+}();
+var Door = /*#__PURE__*/function () {
+  function Door(_ref4) {
     var image = _ref4.image,
         x = _ref4.x,
         y = _ref4.y;
 
-    _classCallCheck(this, OtherObjects);
+    _classCallCheck(this, Door);
 
     this.position = {
       x: x,
@@ -492,14 +671,61 @@ var OtherObjects = /*#__PURE__*/function () {
     this.image = image;
   }
 
-  _createClass(OtherObjects, [{
+  _createClass(Door, [{
     key: "draw",
     value: function draw() {
       c.drawImage(this.image, this.position.x, this.position.y);
     }
   }]);
 
-  return OtherObjects;
+  return Door;
+}();
+var Water = /*#__PURE__*/function () {
+  function Water(_ref5) {
+    var image = _ref5.image,
+        x = _ref5.x,
+        y = _ref5.y;
+
+    _classCallCheck(this, Water);
+
+    this.position = {
+      x: x,
+      y: y
+    };
+    this.image = image;
+    this.cols = 2;
+    this.rows = 1;
+    this.spriteWidth = this.image.width / this.cols;
+    this.spriteHeight = this.image.height / this.rows;
+    this.totalFrames = 2;
+    this.currentFrame = 0;
+    this.srcX = 0;
+    this.srcY = 0;
+    this.framesDrawn = 0;
+  }
+
+  _createClass(Water, [{
+    key: "draw",
+    value: function draw() {
+      this.currentFrame = this.currentFrame % this.totalFrames;
+      this.srcX = this.currentFrame * this.spriteWidth;
+      c.drawImage(this.image, this.srcX, this.srcY, this.spriteWidth, this.spriteHeight, this.position.x, this.position.y, this.spriteWidth, this.spriteHeight);
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.framesDrawn++;
+
+      if (this.framesDrawn >= 20) {
+        this.currentFrame++;
+        this.framesDrawn = 0;
+      }
+
+      this.draw();
+    }
+  }]);
+
+  return Water;
 }();
 
 /***/ }),
@@ -508,21 +734,20 @@ var OtherObjects = /*#__PURE__*/function () {
 /*!*****************************!*\
   !*** ./src/js/world/one.js ***!
   \*****************************/
-/*! exports provided: background, player, otherObjects */
+/*! exports provided: background, player, buildings, doors, water */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "background", function() { return background; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "player", function() { return player; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "otherObjects", function() { return otherObjects; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildings", function() { return buildings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doors", function() { return doors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "water", function() { return water; });
 /* harmony import */ var _game_classes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../game-classes */ "./src/js/game-classes.js");
 /* harmony import */ var _assign_images__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../assign-images */ "./src/js/assign-images.js");
 
 
-var canvas = document.getElementById('fullGame');
-canvas.width = 500;
-canvas.height = 250;
 var background = new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Background"]({
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["r1_image"]
 });
@@ -531,10 +756,40 @@ var player = new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Player"]({
   x: 250,
   y: 125
 });
-var otherObjects = [new _game_classes__WEBPACK_IMPORTED_MODULE_0__["OtherObjects"]({
+var buildings = [new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["building1_image"],
   x: 100,
   y: 100
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["building1_image"],
+  x: 200,
+  y: 200
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["building1_image"],
+  x: 300,
+  y: 300
+})];
+var doors = [new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Door"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["door1_image"],
+  x: 112.5,
+  y: 150
+})];
+var water = [new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 300,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 250,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 300,
+  y: 100
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 208,
+  y: 64
 })];
 
 /***/ }),
@@ -591,6 +846,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/sprites/doors/door_1.png":
+/*!**************************************!*\
+  !*** ./src/sprites/doors/door_1.png ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "87150adc16950c2bf6926f393e194cbd.png");
+
+/***/ }),
+
 /***/ "./src/sprites/objects/brick_black.png":
 /*!*********************************************!*\
   !*** ./src/sprites/objects/brick_black.png ***!
@@ -614,6 +882,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "f08308685b98f8c6fdcc429462b8cf11.png");
+
+/***/ }),
+
+/***/ "./src/sprites/water/water1.png":
+/*!**************************************!*\
+  !*** ./src/sprites/water/water1.png ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "2127c547f224b6a4343257f81e09fd8d.png");
 
 /***/ }),
 
