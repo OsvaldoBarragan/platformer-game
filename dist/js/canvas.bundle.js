@@ -147,14 +147,14 @@ water_image.src = _sprites_water_water1_png__WEBPACK_IMPORTED_MODULE_8__["defaul
 /*!**************************!*\
   !*** ./src/js/canvas.js ***!
   \**************************/
-/*! exports provided: world, topCollision, inWater */
+/*! exports provided: canvas, world, userKeys */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "canvas", function() { return canvas; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "world", function() { return world; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "topCollision", function() { return topCollision; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inWater", function() { return inWater; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userKeys", function() { return userKeys; });
 /* harmony import */ var _world_one__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./world/one */ "./src/js/world/one.js");
 /* harmony import */ var _assign_images__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assign-images */ "./src/js/assign-images.js");
 
@@ -162,19 +162,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var canvas = document.getElementById('fullGame');
-var c = canvas.getContext('2d'); // const canvas2 = document.getElementById('sideInfo')
-// const c2 = canvas2.getContext('2d')
-
+var c = canvas.getContext('2d');
+var canvas2 = document.getElementById('sideInfo');
+var c2 = canvas2.getContext('2d');
 canvas.width = 1000;
-canvas.height = 500; // canvas2.width = 300
-// canvas2.height = 150
-
+canvas.height = 500;
+canvas2.width = 300;
+canvas2.height = 150;
 var world = _world_one__WEBPACK_IMPORTED_MODULE_0__;
-var topCollision = false;
-var bottomCollision = false;
-var leftCollision = false;
-var rightCollision = false;
-var inWater = false;
 var userKeys = {
   w_Key: {
     // go up
@@ -208,179 +203,14 @@ function animate() {
   world.water.forEach(function (water) {
     water.update();
   });
-  world.player.update(); // console.log(topCollision)
-  // Building Conditions
+  world.player.update();
+}
 
-  world.buildings.forEach(function (building) {
-    var player = world.player; // prevent from going down
-
-    if (player.position.x + player.spriteWidth >= building.position.x && player.position.x <= building.position.x + building.image.width && player.position.y + player.spriteHeight <= building.position.y && player.position.y + player.spriteHeight + player.velocity.y >= building.position.y) {
-      topCollision = true;
-      player.velocity.y = 0;
-      player.position.y = building.position.y - player.spriteHeight;
-      console.log(topCollision);
-    } else {
-      topCollision = false;
-    } // if (player.position.x + player.spriteWidth >= building.position.x &&
-    //     player.position.x <= building.position.x + building.image.width &&
-    //     player.position.y >= building.position.y + building.image.height - player.spriteHeight &&
-    //     player.position.y + player.velocity.y <= building.position.y + building.image.height - player.spriteHeight) {
-    //     bottomCollision = true
-    //     player.velocity.y = 0
-    //     player.position.y = building.position.y + building.image.height - player.spriteHeight
-    // }
-    // else {
-    //     bottomCollision = false
-    // }
-    // if (player.position.x + player.spriteWidth >= building.position.x &&
-    //     player.position.x <= building.position.x + building.image.width &&
-    //     player.position.y >= building.position.y + building.image.height - player.spriteHeight &&
-    //     player.position.y + player.velocity.y <= building.position.y + building.image.height - player.spriteHeight) {
-    //     bottomCollision = true
-    //     player.velocity.y = 0
-    //     player.position.y = building.position.y + building.image.height - player.spriteHeight
-    // }
-    // else {
-    //     bottomCollision = false
-    // }
-    //
-    // if (player.position.y + player.spriteHeight >= building.position.y &&
-    //     player.position.y <= building.position.y + building.image.height - player.spriteHeight - 1 &&
-    //     player.position.x + player.spriteWidth <= building.position.x &&
-    //     player.position.x + player.spriteWidth + player.velocity.x >= building.position.x) {
-    //     leftCollision = true
-    //     player.velocity.x = 0
-    //     player.position.x = building.position.x - player.spriteWidth
-    // }
-    // else {
-    //     leftCollision = false
-    // }
-    //
-    // if (player.position.y + player.spriteHeight >= building.position.y &&
-    //     player.position.y <= building.position.y + building.image.height - player.spriteHeight - 1 &&
-    //     player.position.x >= building.position.x + building.image.width &&
-    //     player.position.x + player.velocity.x <= building.position.x + building.image.width) {
-    //     rightCollision = true
-    //     player.velocity.x = 0
-    //     player.position.x = building.position.x + building.image.width
-    // }
-    // else {
-    //     rightCollision = false
-    // }
-
-  }); // if (inWater === true) {
-  //     world.player.spriteHeight = world.player.image.height / 1.5
-  // }
-  // if (inWater === false) {
-  //     world.player.spriteHeight = world.player.image.height
-  // }
-  // Water Conditions
-
-  world.water.forEach(function (water) {
-    var player = world.player;
-
-    if (player.position.x + 5 >= water.position.x && player.position.x + player.spriteWidth - 5 <= water.position.x + water.spriteWidth && player.position.y + player.spriteHeight / 1.5 >= water.position.y && player.position.y + player.spriteHeight <= water.position.y + water.spriteHeight) {
-      inWater = true;
-      console.log(inWater);
-    } else {
-      inWater = false;
-    }
-  }); // scroll background up if player moves down
-
-  if (world.player.position.y + world.player.spriteHeight >= canvas.height) {
-    if (world.background.position.y <= -250) {
-      world.player.position.y = canvas.height - world.player.spriteHeight;
-    } else {
-      if (userKeys.s_Key.pressed === true) {
-        world.background.position.y -= 1;
-        world.buildings.forEach(function (building) {
-          building.position.y -= 1;
-        });
-        world.doors.forEach(function (door) {
-          door.position.y -= 1;
-        });
-        world.water.forEach(function (water) {
-          water.position.y -= 1;
-        });
-      }
-
-      world.player.position.y = canvas.height - world.player.spriteHeight;
-    }
-  } // scroll background down if player moves up
-
-
-  if (world.player.position.y + world.player.velocity.y <= 0) {
-    if (world.background.position.y >= 0) {
-      world.player.position.y = 0;
-    } else {
-      if (userKeys.w_Key.pressed === true) {
-        world.background.position.y += 1;
-        world.buildings.forEach(function (building) {
-          building.position.y += 1;
-        });
-        world.doors.forEach(function (door) {
-          door.position.y += 1;
-        });
-        world.water.forEach(function (water) {
-          water.position.y += 1;
-        });
-      }
-
-      world.player.position.y = 0; // world.background.position.y += 1
-    }
-  } // scroll background to the left if player moves right
-
-
-  if (world.player.position.x >= canvas.width - world.player.spriteWidth) {
-    if (world.background.position.x <= -500) {
-      world.player.position.x = canvas.width - world.player.spriteWidth;
-      world.player.velocity.x = 0;
-    } else {
-      if (userKeys.d_Key.pressed === true) {
-        world.background.position.x -= 1;
-        world.buildings.forEach(function (building) {
-          building.position.x -= 1;
-        });
-        world.doors.forEach(function (door) {
-          door.position.x -= 1;
-        });
-        world.water.forEach(function (water) {
-          water.position.x -= 1;
-        });
-      }
-
-      world.player.position.x = canvas.width - world.player.spriteWidth;
-    }
-  } // scroll background to the right if player moves left
-
-
-  if (world.player.position.x <= 0) {
-    if (world.background.position.x >= 0) {
-      world.player.position.x = 0;
-      world.player.velocity.x = 0;
-    } else {
-      if (userKeys.a_Key.pressed === true) {
-        world.background.position.x += 1;
-        world.buildings.forEach(function (building) {
-          building.position.x += 1;
-        });
-        world.doors.forEach(function (door) {
-          door.position.x += 1;
-        });
-        world.water.forEach(function (water) {
-          water.position.x += 1;
-        });
-      }
-
-      world.player.position.x = 0;
-    }
-  }
-} // function animateInfo() {
-//     requestAnimationFrame(animateInfo)
-//     c2.fillStyle = 'white'
-//     c2.fillRect(0, 0, canvas2.width, canvas2.height)
-// }
-// let numOfImages = 1
+function animateInfo() {
+  requestAnimationFrame(animateInfo);
+  c2.fillStyle = 'white';
+  c2.fillRect(0, 0, canvas2.width, canvas2.height);
+} // let numOfImages = 1
 // function loadImages () {
 //     if (--numOfImages > 0) return
 //     animate()
@@ -388,8 +218,8 @@ function animate() {
 // loadImages()
 
 
-animate(); // animateInfo()
-
+animate();
+animateInfo();
 addEventListener('keydown', function (_ref) {
   var keyCode = _ref.keyCode;
 
@@ -401,16 +231,8 @@ addEventListener('keydown', function (_ref) {
       userKeys.d_Key.pressed = false;
       world.player.image = _assign_images__WEBPACK_IMPORTED_MODULE_1__["mainChar_back_image"];
       world.player.totalFrames = 3;
-
-      if (bottomCollision === true) {
-        break;
-      }
-
-      if (bottomCollision === false) {
-        world.player.velocity.y = -2;
-        break;
-      }
-
+      world.player.velocity.y = -2;
+      break;
   }
 
   switch (keyCode) {
@@ -421,16 +243,8 @@ addEventListener('keydown', function (_ref) {
       userKeys.d_Key.pressed = false;
       world.player.image = _assign_images__WEBPACK_IMPORTED_MODULE_1__["mainChar_front_image"];
       world.player.totalFrames = 3;
-
-      if (topCollision === true) {
-        break;
-      }
-
-      if (topCollision === false) {
-        world.player.velocity.y = 2;
-        break;
-      }
-
+      world.player.velocity.y = 2;
+      break;
   }
 
   switch (keyCode) {
@@ -441,16 +255,8 @@ addEventListener('keydown', function (_ref) {
       userKeys.s_Key.pressed = false;
       world.player.image = _assign_images__WEBPACK_IMPORTED_MODULE_1__["mainChar_left_image"];
       world.player.totalFrames = 3;
-
-      if (rightCollision === true) {
-        break;
-      }
-
-      if (rightCollision === false) {
-        world.player.velocity.x = -2;
-        break;
-      }
-
+      world.player.velocity.x = -2;
+      break;
   }
 
   switch (keyCode) {
@@ -461,16 +267,8 @@ addEventListener('keydown', function (_ref) {
       userKeys.w_Key.pressed = false;
       world.player.image = _assign_images__WEBPACK_IMPORTED_MODULE_1__["mainChar_right_image"];
       world.player.totalFrames = 3;
-
-      if (leftCollision === true) {
-        break;
-      }
-
-      if (leftCollision === false) {
-        world.player.velocity.x = 2;
-        break;
-      }
-
+      world.player.velocity.x = 2;
+      break;
   }
 });
 addEventListener('keyup', function (_ref2) {
@@ -515,11 +313,12 @@ addEventListener('keyup', function (_ref2) {
 /*!********************************!*\
   !*** ./src/js/game-classes.js ***!
   \********************************/
-/*! exports provided: Background, Player, Building, Door, Water */
+/*! exports provided: inWater, Background, Player, Building, Door, Water */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inWater", function() { return inWater; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Background", function() { return Background; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Player", function() { return Player; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Building", function() { return Building; });
@@ -542,8 +341,9 @@ var c = canvas.getContext('2d'); // function createImage(imageSrc) {
 
 canvas.width = 1000;
 canvas.height = 500;
-_canvas__WEBPACK_IMPORTED_MODULE_0__["inWater"];
-_canvas__WEBPACK_IMPORTED_MODULE_0__["world"]; // building class
+_canvas__WEBPACK_IMPORTED_MODULE_0__["world"];
+_canvas__WEBPACK_IMPORTED_MODULE_0__["userKeys"];
+var inWater = false; // building class
 
 var Background = /*#__PURE__*/function () {
   function Background(_ref) {
@@ -593,6 +393,7 @@ var Player = /*#__PURE__*/function () {
     this.cols = 3;
     this.spriteWidth = this.image.width / this.cols;
     this.spriteHeight = this.image.height;
+    this.inWaterHeight = this.image.height / 2;
     this.totalFrames = 3;
     this.currentFrame = 0;
     this.srcX = 0;
@@ -621,10 +422,99 @@ var Player = /*#__PURE__*/function () {
       this.position.x += this.velocity.x;
       this.position.y += this.velocity.y;
 
-      if (_canvas__WEBPACK_IMPORTED_MODULE_0__["inWater"] === true) {
-        this.spriteHeight = this.image.height / 1.5;
-      } else if (_canvas__WEBPACK_IMPORTED_MODULE_0__["inWater"] === false) {
+      if (inWater === false) {
         this.spriteHeight = this.image.height;
+      } // scroll background up if player moves down
+
+
+      if (_canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.position.y + _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.spriteHeight >= canvas.height) {
+        if (_canvas__WEBPACK_IMPORTED_MODULE_0__["world"].background.position.y <= -_canvas__WEBPACK_IMPORTED_MODULE_0__["world"].background.image.height + canvas.height) {
+          _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.position.y = canvas.height - _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.spriteHeight;
+        } else {
+          if (_canvas__WEBPACK_IMPORTED_MODULE_0__["userKeys"].s_Key.pressed === true) {
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].background.position.y -= 1;
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].buildings.forEach(function (building) {
+              building.position.y -= 1;
+            });
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].doors.forEach(function (door) {
+              door.position.y -= 1;
+            });
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].water.forEach(function (water) {
+              water.position.y -= 1;
+            });
+          }
+
+          _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.position.y = canvas.height - _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.spriteHeight;
+        }
+      } // scroll background down if player moves up
+
+
+      if (_canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.position.y + _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.velocity.y <= 0) {
+        if (_canvas__WEBPACK_IMPORTED_MODULE_0__["world"].background.position.y >= 0) {
+          _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.position.y = 0;
+        } else {
+          if (_canvas__WEBPACK_IMPORTED_MODULE_0__["userKeys"].w_Key.pressed === true) {
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].background.position.y += 1;
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].buildings.forEach(function (building) {
+              building.position.y += 1;
+            });
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].doors.forEach(function (door) {
+              door.position.y += 1;
+            });
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].water.forEach(function (water) {
+              water.position.y += 1;
+            });
+          }
+
+          _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.position.y = 0; // world.background.position.y += 1
+        }
+      } // scroll background to the left if player moves right
+
+
+      if (_canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.position.x >= canvas.width - _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.spriteWidth) {
+        if (_canvas__WEBPACK_IMPORTED_MODULE_0__["world"].background.position.x <= -_canvas__WEBPACK_IMPORTED_MODULE_0__["world"].background.image.width + canvas.width) {
+          _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.position.x = canvas.width - _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.spriteWidth;
+          _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.velocity.x = 0;
+          console.log('Stop');
+        } else {
+          if (_canvas__WEBPACK_IMPORTED_MODULE_0__["userKeys"].d_Key.pressed === true) {
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].background.position.x -= 1;
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].buildings.forEach(function (building) {
+              building.position.x -= 1;
+            });
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].doors.forEach(function (door) {
+              door.position.x -= 1;
+            });
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].water.forEach(function (water) {
+              water.position.x -= 1;
+            });
+          }
+
+          _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.position.x = canvas.width - _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.spriteWidth;
+        }
+      } // scroll background to the right if player moves left
+
+
+      if (_canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.position.x <= 0) {
+        if (_canvas__WEBPACK_IMPORTED_MODULE_0__["world"].background.position.x >= 0) {
+          _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.position.x = 0;
+          _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.velocity.x = 0;
+        } else {
+          if (_canvas__WEBPACK_IMPORTED_MODULE_0__["userKeys"].a_Key.pressed === true) {
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].background.position.x += 1;
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].buildings.forEach(function (building) {
+              building.position.x += 1;
+            });
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].doors.forEach(function (door) {
+              door.position.x += 1;
+            });
+            _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].water.forEach(function (water) {
+              water.position.x += 1;
+            });
+          }
+
+          _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player.position.x = 0;
+        }
       }
     }
   }]);
@@ -650,7 +540,31 @@ var Building = /*#__PURE__*/function () {
   _createClass(Building, [{
     key: "draw",
     value: function draw() {
-      c.drawImage(this.image, this.position.x, this.position.y);
+      c.drawImage(this.image, this.position.x, this.position.y); // Building Conditions
+
+      _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].buildings.forEach(function (building) {
+        var player = _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player;
+
+        if (player.position.x + player.spriteWidth >= building.position.x && player.position.x <= building.position.x + building.image.width && player.position.y + player.spriteHeight <= building.position.y && player.position.y + player.spriteHeight + player.velocity.y >= building.position.y) {
+          player.velocity.y = 0;
+          player.position.y = building.position.y - player.spriteHeight;
+        }
+
+        if (player.position.x + player.spriteWidth >= building.position.x && player.position.x <= building.position.x + building.image.width && player.position.y >= building.position.y + building.image.height - player.spriteHeight && player.position.y + player.velocity.y <= building.position.y + building.image.height - player.spriteHeight) {
+          player.velocity.y = 0;
+          player.position.y = building.position.y + building.image.height - player.spriteHeight;
+        }
+
+        if (player.position.x + player.spriteWidth <= building.position.x && player.position.x + player.spriteWidth + player.velocity.x >= building.position.x && player.position.y + player.spriteHeight >= building.position.y && player.position.y < building.position.y + building.image.height - player.spriteHeight) {
+          player.velocity.x = 0;
+          player.position.x = building.position.x - player.spriteWidth;
+        }
+
+        if (player.position.x >= building.position.x + building.image.width && player.position.x + player.velocity.x <= building.position.x + building.image.width && player.position.y + player.spriteHeight >= building.position.y && player.position.y < building.position.y + building.image.height - player.spriteHeight) {
+          player.velocity.x = 0;
+          player.position.x = building.position.x + building.image.width;
+        }
+      });
     }
   }]);
 
@@ -721,7 +635,34 @@ var Water = /*#__PURE__*/function () {
         this.framesDrawn = 0;
       }
 
-      this.draw();
+      this.draw(); // Water Conditions
+
+      _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].water.forEach(function (water) {
+        var player = _canvas__WEBPACK_IMPORTED_MODULE_0__["world"].player;
+
+        if (player.position.x + 5 >= water.position.x && player.position.x + player.spriteWidth - 5 <= water.position.x + water.spriteWidth && player.position.y + player.spriteHeight / 2 >= water.position.y && player.position.y + player.spriteHeight <= water.position.y + water.spriteHeight) {
+          inWater = true;
+          player.spriteHeight = player.inWaterHeight;
+
+          if (_canvas__WEBPACK_IMPORTED_MODULE_0__["userKeys"].w_Key.pressed === true) {
+            player.velocity.y = -0.5;
+          }
+
+          if (_canvas__WEBPACK_IMPORTED_MODULE_0__["userKeys"].s_Key.pressed === true) {
+            player.velocity.y = 0.5;
+          }
+
+          if (_canvas__WEBPACK_IMPORTED_MODULE_0__["userKeys"].a_Key.pressed === true) {
+            player.velocity.x = -0.5;
+          }
+
+          if (_canvas__WEBPACK_IMPORTED_MODULE_0__["userKeys"].d_Key.pressed === true) {
+            player.velocity.x = 0.5;
+          }
+        } else {
+          inWater = false;
+        }
+      });
     }
   }]);
 
@@ -746,14 +687,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "water", function() { return water; });
 /* harmony import */ var _game_classes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../game-classes */ "./src/js/game-classes.js");
 /* harmony import */ var _assign_images__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../assign-images */ "./src/js/assign-images.js");
+/* harmony import */ var _canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../canvas */ "./src/js/canvas.js");
 
 
+
+_canvas__WEBPACK_IMPORTED_MODULE_2__["world"];
 var background = new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Background"]({
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["r1_image"]
 });
 var player = new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Player"]({
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["mainChar_front_image"],
-  x: 250,
+  x: background.image.width / 2 - 19,
   y: 125
 });
 var buildings = [new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Building"]({
@@ -776,7 +720,43 @@ var doors = [new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Door"]({
 })];
 var water = [new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
-  x: 300,
+  x: 0,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 25,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 50,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 75,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 100,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 125,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 150,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 175,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 200,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 225,
   y: 64
 }), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
@@ -784,11 +764,27 @@ var water = [new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
   y: 64
 }), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
-  x: 300,
-  y: 100
+  x: 275,
+  y: 64
 }), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
   image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
-  x: 208,
+  x: 300,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 325,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 350,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 375,
+  y: 64
+}), new _game_classes__WEBPACK_IMPORTED_MODULE_0__["Water"]({
+  image: _assign_images__WEBPACK_IMPORTED_MODULE_1__["water_image"],
+  x: 400,
   y: 64
 })];
 

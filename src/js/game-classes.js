@@ -1,4 +1,4 @@
-import { inWater, world } from './canvas'
+import { world, userKeys } from './canvas'
 const canvas = document.getElementById('fullGame')
 const c = canvas.getContext('2d')
 
@@ -10,8 +10,9 @@ const c = canvas.getContext('2d')
 
 canvas.width = 1000
 canvas.height = 500
-inWater
 world
+userKeys
+export let inWater = false
 
 // building class
 export class Background {
@@ -45,6 +46,7 @@ export class Player {
         this.cols = 3
         this.spriteWidth = this.image.width / this.cols
         this.spriteHeight = this.image.height
+        this.inWaterHeight = this.image.height / 2
         this.totalFrames = 3
         this.currentFrame = 0
         this.srcX = 0
@@ -74,12 +76,96 @@ export class Player {
         this.draw()
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
-
-        if (inWater === true) {
-            this.spriteHeight = this.image.height / 1.5
-        }
-        else if (inWater === false) {
+        if (inWater === false) {
             this.spriteHeight = this.image.height
+        }
+        // scroll background up if player moves down
+        if (world.player.position.y + world.player.spriteHeight >= canvas.height) {
+            if (world.background.position.y <= -world.background.image.height + canvas.height) {
+                world.player.position.y = canvas.height - world.player.spriteHeight
+            }
+            else {
+                if (userKeys.s_Key.pressed === true) {
+                    world.background.position.y -= 1
+                    world.buildings.forEach(building => {
+                        building.position.y -= 1
+                    })
+                    world.doors.forEach(door => {
+                        door.position.y -= 1
+                    })
+                    world.water.forEach(water => {
+                        water.position.y -= 1
+                    })
+                }
+                world.player.position.y = canvas.height - world.player.spriteHeight
+            }
+        }
+        // scroll background down if player moves up
+        if (world.player.position.y + world.player.velocity.y <= 0) {
+            if (world.background.position.y >= 0) {
+                world.player.position.y = 0
+            }
+            else {
+                if (userKeys.w_Key.pressed === true) {
+                    world.background.position.y += 1
+                    world.buildings.forEach(building => {
+                        building.position.y += 1
+                    })
+                    world.doors.forEach(door => {
+                        door.position.y += 1
+                    })
+                    world.water.forEach(water => {
+                        water.position.y += 1
+                    })
+                }
+                world.player.position.y = 0
+                // world.background.position.y += 1
+            }
+        }
+        // scroll background to the left if player moves right
+        if (world.player.position.x >= canvas.width - world.player.spriteWidth) {
+            if (world.background.position.x <= -world.background.image.width + canvas.width) {
+                world.player.position.x = canvas.width - world.player.spriteWidth
+                world.player.velocity.x = 0
+                console.log('Stop')
+            }
+            else {
+                if (userKeys.d_Key.pressed === true) {
+                    world.background.position.x -= 1
+                    world.buildings.forEach(building => {
+                        building.position.x -= 1
+                    })
+                    world.doors.forEach(door => {
+                        door.position.x -= 1
+                    })
+                    world.water.forEach(water => {
+                        water.position.x -= 1
+                    })
+                }
+                world.player.position.x = canvas.width - world.player.spriteWidth
+            }
+        }
+        // scroll background to the right if player moves left
+        if (world.player.position.x <= 0) {
+            if (world.background.position.x >= 0) {
+                world.player.position.x = 0
+                world.player.velocity.x = 0
+            }
+            else {
+                if (userKeys.a_Key.pressed === true) {
+                    world.background.position.x += 1
+                    world.buildings.forEach(building => {
+                        building.position.x += 1
+                    })
+                    world.doors.forEach(door => {
+                        door.position.x += 1
+                    })
+                    world.water.forEach(water => {
+                        water.position.x += 1
+                    })
+                }
+                world.player.position.x = 0
+            }
         }
     }
 }
@@ -95,6 +181,40 @@ export class Building {
     }
     draw() {
         c.drawImage(this.image, this.position.x, this.position.y)
+        // Building Conditions
+        world.buildings.forEach(building => {
+
+            const player = world.player
+
+            if (player.position.x + player.spriteWidth >= building.position.x &&
+                player.position.x <= building.position.x + building.image.width &&
+                player.position.y + player.spriteHeight <= building.position.y &&
+                player.position.y + player.spriteHeight + player.velocity.y >= building.position.y) {
+                player.velocity.y = 0
+                player.position.y = building.position.y - player.spriteHeight
+            }
+            if (player.position.x + player.spriteWidth >= building.position.x &&
+                player.position.x <= building.position.x + building.image.width &&
+                player.position.y >= building.position.y + building.image.height - player.spriteHeight &&
+                player.position.y + player.velocity.y <= building.position.y + building.image.height - player.spriteHeight) {
+                player.velocity.y = 0
+                player.position.y = building.position.y + building.image.height - player.spriteHeight
+            }
+            if (player.position.x + player.spriteWidth <= building.position.x &&
+                player.position.x + player.spriteWidth + player.velocity.x >= building.position.x &&
+                player.position.y + player.spriteHeight >= building.position.y &&
+                player.position.y < building.position.y + building.image.height - player.spriteHeight) {
+                player.velocity.x = 0
+                player.position.x = building.position.x - player.spriteWidth
+            }
+            if (player.position.x >= building.position.x + building.image.width &&
+                player.position.x + player.velocity.x <= building.position.x + building.image.width &&
+                player.position.y + player.spriteHeight >= building.position.y &&
+                player.position.y < building.position.y + building.image.height - player.spriteHeight) {
+                player.velocity.x = 0
+                player.position.x = building.position.x + building.image.width
+            }
+        })
     }
 }
 
@@ -149,5 +269,25 @@ export class Water {
             this.framesDrawn = 0
         }
         this.draw()
+        // Water Conditions
+        world.water.forEach(water => {
+            const player = world.player
+
+            if (player.position.x + 5 >= water.position.x &&
+                player.position.x + player.spriteWidth - 5 <= water.position.x + water.spriteWidth &&
+                player.position.y + (player.spriteHeight / 2) >= water.position.y &&
+                player.position.y + player.spriteHeight <= water.position.y + water.spriteHeight) {
+                inWater = true
+                player.spriteHeight = player.inWaterHeight
+
+                if (userKeys.w_Key.pressed === true) { player.velocity.y = -0.5 }
+                if (userKeys.s_Key.pressed === true) { player.velocity.y = 0.5 }
+                if (userKeys.a_Key.pressed === true) { player.velocity.x = -0.5 }
+                if (userKeys.d_Key.pressed === true) { player.velocity.x = 0.5 }
+            }
+            else {
+                inWater = false
+            }
+        })
     }
 }
