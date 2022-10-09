@@ -8,18 +8,20 @@ const c = canvas.getContext('2d')
 //     return image
 // }
 
-canvas.width = 1000
+canvas.width = 500
 canvas.height = 500
+
 world
+
 userKeys
 export let inWater = false
 
 // building class
 export class Background {
-    constructor({ image }) {
+    constructor({ image, x, y }) {
         this.position = {
-            x: 0,
-            y: 0
+            x: x,
+            y: y
         }
         this.image = image
     }
@@ -28,6 +30,85 @@ export class Background {
     }
     update() {
         this.draw()
+        if (world.player.position.y + world.player.spriteHeight >= world.background.position.y + world.background.image.height) {
+            world.player.position.y = world.background.position.y + world.background.image.height - world.player.spriteHeight
+        }
+        if (world.player.position.y <= world.background.position.y) {
+            world.player.position.y = world.background.position.y
+        }
+        if (world.player.position.x + world.player.spriteWidth >= world.background.position.x + world.background.image.width) {
+            world.player.position.x = world.background.position.x + world.background.image.width - world.player.spriteWidth
+        }
+        if (world.player.position.x <= world.background.position.x) {
+            world.player.position.x = world.background.position.x
+        }
+        // // scroll background down if player moves up
+        // if (world.player.position.y + world.player.velocity.y <= 0) {
+        //     if (world.background.position.y >= 0) {
+        //         world.player.position.y = 0
+        //     }
+        //     else {
+        //         if (userKeys.w_Key.pressed === true) {
+        //             world.background.position.y += 1
+        //             world.buildings.forEach(building => {
+        //                 building.position.y += 1
+        //             })
+        //             world.doors.forEach(door => {
+        //                 door.position.y += 1
+        //             })
+        //             world.water.forEach(water => {
+        //                 water.position.y += 1
+        //             })
+        //         }
+        //         world.player.position.y = 0
+        //         // world.background.position.y += 1
+        //     }
+        // }
+        // // scroll background to the left if player moves right
+        // if (world.player.position.x >= canvas.width - world.player.spriteWidth) {
+        //     if (world.background.position.x <= -world.background.image.width + canvas.width) {
+        //         world.player.position.x = canvas.width - world.player.spriteWidth
+        //         world.player.velocity.x = 0
+        //         console.log('Stop')
+        //     }
+        //     else {
+        //         if (userKeys.d_Key.pressed === true) {
+        //             world.background.position.x -= 1
+        //             world.buildings.forEach(building => {
+        //                 building.position.x -= 1
+        //             })
+        //             world.doors.forEach(door => {
+        //                 door.position.x -= 1
+        //             })
+        //             world.water.forEach(water => {
+        //                 water.position.x -= 1
+        //             })
+        //         }
+        //         world.player.position.x = canvas.width - world.player.spriteWidth
+        //     }
+        // }
+        // // scroll background to the right if player moves left
+        // if (world.player.position.x <= 0) {
+        //     if (world.background.position.x >= 0) {
+        //         world.player.position.x = 0
+        //         world.player.velocity.x = 0
+        //     }
+        //     else {
+        //         if (userKeys.a_Key.pressed === true) {
+        //             world.background.position.x += 1
+        //             world.buildings.forEach(building => {
+        //                 building.position.x += 1
+        //             })
+        //             world.doors.forEach(door => {
+        //                 door.position.x += 1
+        //             })
+        //             world.water.forEach(water => {
+        //                 water.position.x += 1
+        //             })
+        //         }
+        //         world.player.position.x = 0
+        //     }
+        // }
     }
 }
 
@@ -86,15 +167,15 @@ export class Player {
             }
             else {
                 if (userKeys.s_Key.pressed === true) {
-                    world.background.position.y -= 1
+                    world.background.position.y -= 2
                     world.buildings.forEach(building => {
-                        building.position.y -= 1
+                        building.position.y -= 2
                     })
                     world.doors.forEach(door => {
-                        door.position.y -= 1
+                        door.position.y -= 2
                     })
                     world.water.forEach(water => {
-                        water.position.y -= 1
+                        water.position.y -= 2
                     })
                 }
                 world.player.position.y = canvas.height - world.player.spriteHeight
@@ -107,15 +188,15 @@ export class Player {
             }
             else {
                 if (userKeys.w_Key.pressed === true) {
-                    world.background.position.y += 1
+                    world.background.position.y += 2
                     world.buildings.forEach(building => {
-                        building.position.y += 1
+                        building.position.y += 2
                     })
                     world.doors.forEach(door => {
-                        door.position.y += 1
+                        door.position.y += 2
                     })
                     world.water.forEach(water => {
-                        water.position.y += 1
+                        water.position.y += 2
                     })
                 }
                 world.player.position.y = 0
@@ -127,19 +208,18 @@ export class Player {
             if (world.background.position.x <= -world.background.image.width + canvas.width) {
                 world.player.position.x = canvas.width - world.player.spriteWidth
                 world.player.velocity.x = 0
-                console.log('Stop')
             }
             else {
                 if (userKeys.d_Key.pressed === true) {
-                    world.background.position.x -= 1
+                    world.background.position.x -= 2
                     world.buildings.forEach(building => {
-                        building.position.x -= 1
+                        building.position.x -= 2
                     })
                     world.doors.forEach(door => {
-                        door.position.x -= 1
+                        door.position.x -= 2
                     })
                     world.water.forEach(water => {
-                        water.position.x -= 1
+                        water.position.x -= 2
                     })
                 }
                 world.player.position.x = canvas.width - world.player.spriteWidth
@@ -153,15 +233,15 @@ export class Player {
             }
             else {
                 if (userKeys.a_Key.pressed === true) {
-                    world.background.position.x += 1
+                    world.background.position.x += 2
                     world.buildings.forEach(building => {
-                        building.position.x += 1
+                        building.position.x += 2
                     })
                     world.doors.forEach(door => {
-                        door.position.x += 1
+                        door.position.x += 2
                     })
                     world.water.forEach(water => {
-                        water.position.x += 1
+                        water.position.x += 2
                     })
                 }
                 world.player.position.x = 0
@@ -219,12 +299,15 @@ export class Building {
 }
 
 export class Door {
-    constructor({ image, x, y }) {
+    constructor({ image, x, y, goIn, goesTo }) {
         this.position = {
             x: x,
             y: y
         }
         this.image = image
+        this.goIn = goIn
+        this.goesTo = goesTo
+
     }
     draw() {
         c.drawImage(this.image, this.position.x, this.position.y)

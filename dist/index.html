@@ -10,10 +10,21 @@
         display: flex;
         align-items: center;
       }
+      #fullGame {
+        position: absolute;
+        left: 500px;
+      }
+      #sideInfo {
+        position: absolute;
+        top: 501px;
+        left: 500px;
+      }
     </style>
   <link rel="shortcut icon" href="favicon.ico"></head>
   <body>
-    <canvas id="fullGame"></canvas>
-    <canvas id="sideInfo"></canvas>
+    <div id='si'>
+      <canvas id="fullGame"></canvas>
+      <canvas id="sideInfo"></canvas>
+    </div>
   <script src="./js/canvas.bundle.js"></script></body>
 </html>
